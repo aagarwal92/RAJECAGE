@@ -60,7 +60,7 @@ if ($user_id) {
   $likes = idx($facebook->api('/me/likes?limit=10'), 'data', array());
 
   // This fetches 4 of your friends.
-  $friends = idx($facebook->api('/me/friends?limit=1'), 'data', array());
+  $friends = idx($facebook->api('/me/friends?limit=10'), 'data', array());
 
   // And this returns 16 of your photos.
   $photos = idx($facebook->api('/me/photos?limit=16'), 'data', array());
