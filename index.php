@@ -57,10 +57,10 @@ if ($user_id) {
   // This fetches some things that you like . 'limit=*" only returns * values.
   // To see the format of the data you are retrieving, use the "Graph API
   // Explorer" which is at https://developers.facebook.com/tools/explorer/
-  $likes = idx($facebook->api('/me/likes?limit=4'), 'data', array());
+  $likes = idx($facebook->api('/me/likes?limit=1'), 'data', array());
 
   // This fetches 4 of your friends.
-  $friends = idx($facebook->api('/me/friends?limit=4'), 'data', array());
+  $friends = idx($facebook->api('/me/friends?limit=1'), 'data', array());
 
   // And this returns 16 of your photos.
   $photos = idx($facebook->api('/me/photos?limit=16'), 'data', array());
@@ -261,9 +261,9 @@ $app_name = idx($app_info, 'name', '');
 
     <section id="samples" class="clearfix">
       <h1> Take a good look at your friends below. Soon, you'll have to guess who they are.</h1>
-      <div class="list">
+      <div class="center">
         <h3>A few of your friends</h3>
-        <ul class="friends">
+        <ul  style="text-align:center" class="friends">
           <?php
             foreach ($friends as $friend) {
               // Extract the pieces of info we need from the requests above
@@ -271,16 +271,21 @@ $app_name = idx($app_info, 'name', '');
               $name = idx($friend, 'name');
           ?>
           <li>
-            <a href="https://www.facebook.com/<?php echo he($id); ?>" target="_top">
+            <a>
               <img src="https://graph.facebook.com/<?php echo he($id) ?>/picture?type=square" alt="<?php echo he($name); ?>">
-              <?php echo he($name); ?>
             </a>
           </li>
+          <li>
+             <input type="text" value="Guess who!" onclick="this.value = '';"> 
+            <input type="submit" value="Submit">
+          </li>
+
           <?php
             }
           ?>
         </ul>
       </div>
+
 
 <!--
       <div class="list inline">
@@ -328,7 +333,7 @@ $app_name = idx($app_info, 'name', '');
           ?>
         </ul>
       </div>
--->
+
       <div class="list">
         <h3>Friends using this app</h3>
         <ul class="friends">
@@ -350,7 +355,7 @@ $app_name = idx($app_info, 'name', '');
         </ul>
       </div>
     </section>
-
+-->
     <?php
       }
     ?>
