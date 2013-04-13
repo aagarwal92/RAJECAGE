@@ -1,12 +1,12 @@
 <?php
 
 /**
- * This sample app is provided to kickstart your experience using Facebook's
- * resources for developers.  This sample app provides examples of several
- * key concepts, including authentication, the Graph API, and FQL (Facebook
- * Query Language). Please visit the docs at 'developers.facebook.com/docs'
- * to learn more about the resources available to you
- */
+* This sample app is provided to kickstart your experience using Facebook's
+* resources for developers.  This sample app provides examples of several
+* key concepts, including authentication, the Graph API, and FQL (Facebook
+* Query Language). Please visit the docs at 'developers.facebook.com/docs'
+* to learn more about the resources available to you
+*/
 
 // Provides access to app specific values such as your app id and app secret.
 // Defined in 'AppInfo.php'
@@ -23,13 +23,13 @@ require_once('utils.php');
 
 
 /*****************************************************************************
- *
- * The content below provides examples of how to fetch Facebook data using the
- * Graph API and FQL.  It uses the helper functions defined in 'utils.php' to
- * do so.  You should change this section so that it prepares all of the
- * information that you want to display to the user.
- *
- ****************************************************************************/
+*
+* The content below provides examples of how to fetch Facebook data using the
+* Graph API and FQL.  It uses the helper functions defined in 'utils.php' to
+* do so.  You should change this section so that it prepares all of the
+* information that you want to display to the user.
+*
+****************************************************************************/
 
 require_once('sdk/src/facebook.php');
 
@@ -57,16 +57,21 @@ if ($user_id) {
   // This fetches some things that you like . 'limit=*" only returns * values.
   // To see the format of the data you are retrieving, use the "Graph API
   // Explorer" which is at https://developers.facebook.com/tools/explorer/
-
+  $likes = idx($facebook->api('/me/likes?limit=10'), 'data', array());
 
   // This fetches 4 of your friends.
   $friends = idx($facebook->api('/me/friends?limit=10'), 'data', array());
-  shuffle($friends);
+
   // And this returns 16 of your photos.
+  $photos = idx($facebook->api('/me/photos?limit=16'), 'data', array());
 
   // Here is an example of a FQL call that fetches all of your friends that are
   // using this app
-
+  $app_using_friends = $facebook->api(array(
+    'method' => 'fql.query',
+    'query' => 'SELECT uid, name FROM user WHERE uid IN(SELECT uid2 FROM friend WHERE uid1 = me()) AND is_app_user = 1'
+  ));
+}
 
 // Fetch the basic info of the app that they are using
 $app_info = $facebook->api('/'. AppInfo::appID());
@@ -76,304 +81,288 @@ $app_name = idx($app_info, 'name', '');
 ?>
 <!DOCTYPE html>
 <html xmlns:fb="http://ogp.me/ns/fb#" lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes" />
+ <head>
+   <meta charset="utf-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes" />
 
-    <title><?php echo he($app_name); ?></title>
-    <link rel="stylesheet" href="stylesheets/screen.css" media="Screen" type="text/css" />
-    <link rel="stylesheet" href="stylesheets/mobile.css" media="handheld, only screen and (max-width: 480px), only screen and (max-device-width: 480px)" type="text/css" />
+   <title><?php echo he($app_name); ?></title>
+   <link rel="stylesheet" href="stylesheets/screen.css" media="Screen" type="text/css" />
+   <link rel="stylesheet" href="stylesheets/mobile.css" media="handheld, only screen and (max-width: 480px), only screen and (max-device-width: 480px)" type="text/css" />
 
-    <!--[if IEMobile]>
-    <link rel="stylesheet" href="mobile.css" media="screen" type="text/css"  />
-    <![endif]-->
+   <!--[if IEMobile]>
+   <link rel="stylesheet" href="mobile.css" media="screen" type="text/css"  />
+   <![endif]-->
 
-    <!-- These are Open Graph tags.  They add meta data to your  -->
-    <!-- site that facebook uses when your content is shared     -->
-    <!-- over facebook.  You should fill these tags in with      -->
-    <!-- your data.  To learn more about Open Graph, visit       -->
-    <!-- 'https://developers.facebook.com/docs/opengraph/'       -->
-    <meta property="og:title" content="<?php echo he($app_name); ?>" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="<?php echo AppInfo::getUrl(); ?>" />
-    <meta property="og:image" content="<?php echo AppInfo::getUrl('/logo.png'); ?>" />
-    <meta property="og:site_name" content="<?php echo he($app_name); ?>" />
-    <meta property="og:description" content="My first app" />
-    <meta property="fb:app_id" content="<?php echo AppInfo::appID(); ?>" />
+   <!-- These are Open Graph tags.  They add meta data to your  -->
+   <!-- site that facebook uses when your content is shared     -->
+   <!-- over facebook.  You should fill these tags in with      -->
+   <!-- your data.  To learn more about Open Graph, visit       -->
+   <!-- 'https://developers.facebook.com/docs/opengraph/'       -->
+   <meta property="og:title" content="<?php echo he($app_name); ?>" />
+   <meta property="og:type" content="website" />
+   <meta property="og:url" content="<?php echo AppInfo::getUrl(); ?>" />
+   <meta property="og:image" content="<?php echo AppInfo::getUrl('/logo.png'); ?>" />
+   <meta property="og:site_name" content="<?php echo he($app_name); ?>" />
+   <meta property="og:description" content="My first app" />
+   <meta property="fb:app_id" content="<?php echo AppInfo::appID(); ?>" />
 
-    <script type="text/javascript" src="/javascript/jquery-1.7.1.min.js"></script>
+   <script type="text/javascript" src="/javascript/jquery-1.7.1.min.js"></script>
 
-    <script type="text/javascript">
-      function logResponse(response) {
-        if (console && console.log) {
-          console.log('The response was', response);
-        }
-      }
+   <script type="text/javascript">
+     function logResponse(response) {
+       if (console && console.log) {
+         console.log('The response was', response);
+       }
+     }
 
-      $(function(){
-        // Set up so we handle click on the buttons
-        c$('#postToWall').click(function() {
-          FB.ui(
-            {
-              method : 'feed',
-              link   : $(this).attr('data-url')
-            },
-            function (response) {
-              // If response is null the user canceled the dialog
-              if (response != null) {
-                logResponse(response);
-              }
-            }
-          );
-        });
+     $(function(){
+       // Set up so we handle click on the buttons
+       $('#postToWall').click(function() {
+         FB.ui(
+           {
+             method : 'feed',
+             link   : $(this).attr('data-url')
+           },
+           function (response) {
+             // If response is null the user canceled the dialog
+             if (response != null) {
+               logResponse(response);
+             }
+           }
+         );
+       });
 
-        $('#sendToFriends').click(function() {
-          FB.ui(
-            {
-              method : 'send',
-              link   : $(this).attr('data-url')
-            },
-            function (response) {
-              // If response is null the user canceled the dialog
-              if (response != null) {
-                logResponse(response);
-              }
-            }
-          );
-        });
+       $('#sendToFriends').click(function() {
+         FB.ui(
+           {
+             method : 'send',
+             link   : $(this).attr('data-url')
+           },
+           function (response) {
+             // If response is null the user canceled the dialog
+             if (response != null) {
+               logResponse(response);
+             }
+           }
+         );
+       });
 
-        $('#sendRequest').click(function() {
-          FB.ui(
-            {
-              method  : 'apprequests',
-              message : $(this).attr('data-message')
-            },
-            function (response) {
-              // If response is null the user canceled the dialog
-              if (response != null) {
-                logResponse(response);
-              }
-            }
-          );
-        });
-      });
-    </script>
+       $('#sendRequest').click(function() {
+         FB.ui(
+           {
+             method  : 'apprequests',
+             message : $(this).attr('data-message')
+           },
+           function (response) {
+             // If response is null the user canceled the dialog
+             if (response != null) {
+               logResponse(response);
+             }
+           }
+         );
+       });
+     });
+   </script>
 
-    <!--[if IE]>
-      <script type="text/javascript">
-        var tags = ['header', 'section'];
-        while(tags.length)
-          document.createElement(tags.pop());
-      </script>
-    <![endif]-->
- <script>
-  // basic show and hide
- $(document).ready(function() 
- {
-   $('#samples').hide();
-   $('#reset').hide();
-   $('#click').click( function() 
-   {
-    $('#samples').show();
-    $('#reset').show();
-    event.preventDefault();
-   });
+   <!--[if IE]>
+     <script type="text/javascript">
+       var tags = ['header', 'section'];
+       while(tags.length)
+         document.createElement(tags.pop());
+     </script>
+   <![endif]-->
+<script>
+ // basic show and hide
+$(document).ready(function()
+{
+  $('#samples').hide();
+  $('#reset').hide();
+  $('#click').click( function()
+  {
+   $('#samples').show();
+   $('#reset').show();
+   event.preventDefault();
+  });
 });
 </script>
-  </head>
+ </head>
 
-  <body>
-    <div id="fb-root"></div>
-    <script type="text/javascript">
-      window.fbAsyncInit = function() {
-        FB.init({
-          appId      : '<?php echo AppInfo::appID(); ?>', // App ID
-          channelUrl : '//<?php echo $_SERVER["HTTP_HOST"]; ?>/channel.html', // Channel File
-          status     : true, // check login status
-          cookie     : true, // enable cookies to allow the server to access the session
-          xfbml      : true // parse XFBML
-        });
+ <body>
+   <div id="fb-root"></div>
+   <script type="text/javascript">
+     window.fbAsyncInit = function() {
+       FB.init({
+         appId      : '<?php echo AppInfo::appID(); ?>', // App ID
+         channelUrl : '//<?php echo $_SERVER["HTTP_HOST"]; ?>/channel.html', // Channel File
+         status     : true, // check login status
+         cookie     : true, // enable cookies to allow the server to access the session
+         xfbml      : true // parse XFBML
+       });
 
-        // Listen to the auth.login which will be called when the user logs in
-        // using the Login button
-        FB.Event.subscribe('auth.login', function(response) {
-          // We want to reload the page now so PHP can read the cookie that the
-          // Javascript SDK sat. But we don't want to use
-          // window.location.reload() because if this is in a canvas there was a
-          // post made to this page and a reload will trigger a message to the
-          // user asking if they want to send data again.
-          window.location = window.location;
-        });
+       // Listen to the auth.login which will be called when the user logs in
+       // using the Login button
+       FB.Event.subscribe('auth.login', function(response) {
+         // We want to reload the page now so PHP can read the cookie that the
+         // Javascript SDK sat. But we don't want to use
+         // window.location.reload() because if this is in a canvas there was a
+         // post made to this page and a reload will trigger a message to the
+         // user asking if they want to send data again.
+         window.location = window.location;
+       });
 
-        FB.Canvas.setAutoGrow();
-      };
+       FB.Canvas.setAutoGrow();
+     };
 
-      // Load the SDK Asynchronously
-      (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_US/all.js";
-        fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));
-    </script>
+     // Load the SDK Asynchronously
+     (function(d, s, id) {
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) return;
+       js = d.createElement(s); js.id = id;
+       js.src = "//connect.facebook.net/en_US/all.js";
+       fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
+   </script>
 
-    <header class="clearfix">
-      <?php if (isset($basic)) { ?>
-      <p id="picture" style="background-image: url(https://graph.facebook.com/<?php echo he($user_id); ?>/picture?type=normal)"></p>
+   <header class="clearfix">
+     <?php if (isset($basic)) { ?>
+     <p id="picture" style="background-image: url(https://graph.facebook.com/<?php echo he($user_id); ?>/picture?type=normal)"></p>
 
-      <div>
-        <h1>Welcome, <strong><?php echo he(idx($basic, 'name')); ?></strong></h1>
-        <p class="tagline">
-          This is your app
-          <a href="<?php echo he(idx($app_info, 'link'));?>" target="_top"><?php echo he($app_name); ?></a>
-        </p>
+     <div>
+       <h1>Welcome, <strong><?php echo he(idx($basic, 'name')); ?></strong></h1>
+       <p class="tagline">
+         This is your app
+         <a href="<?php echo he(idx($app_info, 'link'));?>" target="_top"><?php echo he($app_name); ?></a>
+       </p>
 
-        <div id="share-app">
-          <p>Share your app:</p>
-          <ul>
-            <li>
-              <a href="#" class="facebook-button" id="postToWall" data-url="<?php echo AppInfo::getUrl(); ?>">
-                <span class="plus">Post to Wall</span>
-              </a>
-            </li>
-           <!-- <li>
-              <a href="#" class="facebook-button speech-bubble" id="sendToFriends" data-url="<?php echo AppInfo::getUrl(); ?>">
-                <span class="speech-bubble">Send Message</span>
-              </a>
-            </li>-->
-            <li>
-              <a href="#" class="facebook-button apprequests" id="sendRequest" data-message="Test this awesome app">
-                <pan class="apprequests">Send Requests</span>
-              </a>
-            </li>
-          </ul> 
-        </div>
-      </div>
-      <?php } else { ?>
-      <div>
-        <h1>RAJE CAGE</h1>
-        <div class="fb-login-button" data-scope="user_likes,user_photos"></div>
-      </div>
-      <?php } ?>
-    </header>
+       <div id="share-app">
+         <p>Share your app:</p>
+         <ul>
+           <li>
+             <a href="#" class="facebook-button" id="postToWall" data-url="<?php echo AppInfo::getUrl(); ?>">
+               <span class="plus">Post to Wall</span>
+             </a>
+           </li>
+          <!-- <li>
+             <a href="#" class="facebook-button speech-bubble" id="sendToFriends" data-url="<?php echo AppInfo::getUrl(); ?>">
+               <span class="speech-bubble">Send Message</span>
+             </a>
+           </li>-->
+           <li>
+             <a href="#" class="facebook-button apprequests" id="sendRequest" data-message="Test this awesome app">
+               <span class="apprequests">Send Requests</span>
+             </a>
+           </li>
+         </ul>
+       </div>
+     </div>
+     <?php } else { ?>
+     <div>
+       <h1>RAJE CAGE</h1>
+       <div class="fb-login-button" data-scope="user_likes,user_photos"></div>
+     </div>
+     <?php } ?>
+   </header>
 
-    
-    <section id="get-started">
-      <p>Welcome to Raje Cage!<br>
-      Here are some friends of yours. Let's see if you can guess their names.</p>
-      <a href="#" target="_top" onclick="return false;countdown()" id="click" class="button">Click to Begin!</a>
-      <a href="#" target="_top" onclick="return false" id="reset" class="button">Reset</a>
+  
+   <section id="get-started">
+     <p>Welcome to Raje Cage!<br>
+     Here are some friends of yours. Let's see if you can guess their names.</p>
+     <a href="#" target="_top" onclick="return false" id="click" class="button">Click to Begin!</a>
+     <a href="#" target="_top" onclick="return false" id="reset" class="button">Reset</a>
 
-    </section>
+   </section>
 
-    <?php
+   <?php
       if ($user_id) {
     ?>
 
-    <section id="samples" class="clearfix">
-      <h1> Take a good look at your friends below. Soon, you'll have to guess who they are.</h1>
-      <div class="timer" style="text-align:center">
-          <span id="countdown-1">30 seconds</span>
+   <section id="samples" class="clearfix">
+     <h1> Take a good look at your friends below. Soon, you'll have to guess who they are.</h1>
+     <div class="timer" style="text-align:center">
+         <span id="countdown-1">30 seconds</span>
 <script type="text/javascript">
-    // Initialize clock countdowns by using the total seconds in the elements tag
-    secs  = parseInt(document.getElementById('countdown-1').innerHTML,10);  //??? parse correct?
-    setTimeout("countdown('countdown-1',"+secs+")", 1000);
+   // Initialize clock countdowns by using the total seconds in the elements tag
+   secs  = parseInt(document.getElementById('countdown-1').innerHTML,10);  //??? parse correct?
+   setTimeout("countdown('countdown-1',"+secs+")", 1000);
 
-    /**
-     * Countdown function
-     * Clock count downs to 0:00 then hides the element holding the clock
-     * @param id Element ID of clock placeholder
-     * @param timer Total seconds to display clock
-     */
-   timer = 31;
-    function countdown(){
-        timer--;
-        minRemain  = Math.floor(timer / 60);  
-        secsRemain = new String(timer - (minRemain * 60));
-        // Pad the string with leading 0 if less than 2 chars long
-        if (secsRemain.length < 2) {
-            secsRemain =  '0' + secsRemain;
-        }
+   /**
+    * Countdown function
+    * Clock count downs to 0:00 then hides the element holding the clock
+    * @param id Element ID of clock placeholder
+    * @param timer Total seconds to display clock
+    */
+   function countdown(id, timer){
+       timer--;
+       minRemain  = Math.floor(timer / 60); 
+       secsRemain = new String(timer - (minRemain * 60));
+       // Pad the string with leading 0 if less than 2 chars long
+       if (secsRemain.length < 2) {
+           secsRemain =  '0' + secsRemain;
+       }
 
-        // String format the remaining time
-        clock      = minRemain + ":" + secsRemain;
-        document.getElementById(id).innerHTML = clock;
-        if ( timer > 0 ) {
-            // Time still remains, call this function again in 1 sec
-            setTimeout("countdown()", 1000);
-        } else {
-            // Time is out! Hide the countdown
-           //document.getElementById(id).style.display = 'none';
-          alert("Game over!");
-        }
-    }
+       // String format the remaining time
+       clock      = minRemain + ":" + secsRemain;
+       document.getElementById(id).innerHTML = clock;
+       if ( timer > 0 ) {
+           // Time still remains, call this function again in 1 sec
+           setTimeout("countdown('" + id + "'," + timer + ")", 1000);
+       } else {
+           // Time is out! Hide the countdown
+          //document.getElementById(id).style.display = 'none';
+         alert("Game over!");
+       }
+   }
 </script>
-
-<script LANGUAGE="JavaScript">
+<SCRIPT LANGUAGE="JavaScript">
 function strcmp(a, b) {
-    a = a.toString(), b = b.toString();
-    for (var i=0,n=Math.max(a.length, b.length); i<n && a.charAt(i) === b.charAt(i); ++i);
-    if (i === n) return 0;
-    return a.charAt(i) > b.charAt(i) ? -1 : 1;
+   a = a.toString(), b = b.toString();
+   for (var i=0,n=Math.max(a.length, b.length); i<n && a.charAt(i) === b.charAt(i); ++i);
+   if (i === n) return 0;
+   return a.charAt(i) > b.charAt(i) ? -1 : 1;
 }
 function testResults (form) {
-    var x = document.getElementById("user_name");
-    var TestVar = form.input.value;
-    if (!strcmp(x, TestVar))
-    {
-    alert ("You typed: " + TestVar);
-    }
-    else alert ("you failed");
+   var x = document.getElementById("user_name");
+   var TestVar = form.inputbox.value;
+   if (!strcmp(x, TestVar))
+   {
+   alert ("You typed: " + TestVar);
+   }
+   else alert ("you failed");
 }
-</script>
+</SCRIPT>
 
-  </div>
-      <div class="center" >
-        <ul style="text-align:center" class="friends">
-          <?php
-           $i = 0
-           while ($i = 0) 
-           {
-             $friends[0];
-             $i++;
-          }
-   //         foreach ($friends as $friend) {
-            // Extract the pieces of info we need from the requests above
-      //        $id = idx($friend, 'id');
-       //       $name = idx($friend, 'name');
+ </div>
+     <div class="center">
+       <ul  style="text-align:center" class="friends">
+         <?php
+            foreach ($friends as $friend) {
+              // Extract the pieces of info we need from the requests above
+              $id = idx($friend, 'id');
+              $name = idx($friend, 'name');
           ?>
-          <li>
-            <a>
-              <img src="https://graph.facebook.com/<?php echo he($id) ?>/picture?width=200&height=200 " alt="<?php echo he($name); ?>">
-            </a>
-          </li>
-          <li>
-            <form action="http://apps.facebook.com/rajecage/" method="post">
-             <input type="text" name="input" value="Guess who!" onclick="this.value ='';"> 
-             <input type="submit" name="submit" value="Submit" onclick="(">
-            </form>
-          </li>
+         <li>
+           <a>
+             <img src="https://graph.facebook.com/<?php echo he($id) ?>/picture?width=200&height=200 " alt="<?php echo he($name); ?>">
+        <span id="user_name" class="hidden_elem">$name</span>
+           </a>
+         </li>
+         <li>
+           <form action="http://apps.facebook.com/rajecage/" method="post">
+            <input type="text" name="input" value="Guess who!" onclick="this.value ='';">
+            <input type="submit" name="submit" value="Submit" onclick="testResults(this.form)">
+           </form>
+         </li>
 
-          <?php
-          /*
-            if (isset($_POST['input'])){
-              $formvalue = $_POST['input'];
-              $formvalue = strtolower($formvalue);
-              if (strcmp($formvalue, $name) == 0){
-              } else {
-              }
-            }*/
-          ?>
-        </ul>
-      </div>
+
+       </ul>
+     </div>
 
 
 <!--
-      <div class="list inline">
-        <h3>Recent photos</h3>
-        <ul class="photos">
-          <?php
+     <div class="list inline">
+       <h3>Recent photos</h3>
+       <ul class="photos">
+         <?php
             $f= 0;
             foreach ($photos as $photo) {
               // Extract the pieces of info we need from the requests above
@@ -383,19 +372,19 @@ function testResults (form) {
 
               $class = ($i++ % 4 === 0) ? 'first-column' : '';
           ?>
-          <li style="background-image: url(<?php echo he($picture); ?>);" class="<?php echo $class; ?>">
-            <a href="<?php echo he($link); ?>" target="_top"></a>
-          </li>
-          <?php
+         <li style="background-image: url(<?php echo he($picture); ?>);" class="<?php echo $class; ?>">
+           <a href="<?php echo he($link); ?>" target="_top"></a>
+         </li>
+         <?php
             }
           ?>
-        </ul>
-      </div>
+       </ul>
+     </div>
 
-      <div class="list">
-        <h3>Things you like</h3>
-        <ul class="things">
-          <?php
+     <div class="list">
+       <h3>Things you like</h3>
+       <ul class="things">
+         <?php
             foreach ($likes as $like) {
               // Extract the pieces of info we need from the requests above
               $id = idx($like, 'id');
@@ -404,43 +393,43 @@ function testResults (form) {
               // This display's the object that the user liked as a link to
               // that object's page.
           ?>
-          <li>
-            <a href="https://www.facebook.com/<?php echo he($id); ?>" target="_top">
-              <img src="https://graph.facebook.com/<?php echo he($id) ?>/picture?type=square" alt="<?php echo he($item); ?>">
-              <?php echo he($item); ?>
-            </a>
-          </li>
-          <?php
+         <li>
+           <a href="https://www.facebook.com/<?php echo he($id); ?>" target="_top">
+             <img src="https://graph.facebook.com/<?php echo he($id) ?>/picture?type=square" alt="<?php echo he($item); ?>">
+             <?php echo he($item); ?>
+           </a>
+         </li>
+         <?php
             }
           ?>
-        </ul>
-      </div>
+       </ul>
+     </div>
 
-      <div class="list">
-        <h3>Friends using this app</h3>
-        <ul class="friends">
-          <?php
+     <div class="list">
+       <h3>Friends using this app</h3>
+       <ul class="friends">
+         <?php
             foreach ($app_using_friends as $auf) {
               // Extract the pieces of info we need from the requests above
               $id = idx($auf, 'uid');
               $name = idx($auf, 'name');
           ?>
-          <li>
-            <a href="https://www.facebook.com/<?php echo he($id); ?>" target="_top">
-              <img src="https://graph.facebook.com/<?php echo he($id) ?>/picture?type=square" alt="<?php echo he($name); ?>">
-              <?php echo he($name); ?>
-            </a>
-          </li>
-          <?php
+         <li>
+           <a href="https://www.facebook.com/<?php echo he($id); ?>" target="_top">
+             <img src="https://graph.facebook.com/<?php echo he($id) ?>/picture?type=square" alt="<?php echo he($name); ?>">
+             <?php echo he($name); ?>
+           </a>
+         </li>
+         <?php
             }
           ?>
-        </ul>
-      </div>
-    </section>
+       </ul>
+     </div>
+   </section>
 -->
-    <?php
+   <?php
       }
     }
     ?>
-  </body>
+ </body>
 </html>
