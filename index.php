@@ -251,6 +251,7 @@ $app_name = idx($app_info, 'name', '');
     
     <section id="get-started">
       <p>Welcome to Raje Cage!<br>
+       <button type = "button"> Get Started</button> 
       Here are some friends of yours. Let's see if you can guess their names.</p>
     </section>
 
