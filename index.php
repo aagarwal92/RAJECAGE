@@ -57,14 +57,14 @@ if ($user_id) {
   // This fetches some things that you like . 'limit=*" only returns * values.
   // To see the format of the data you are retrieving, use the "Graph API
   // Explorer" which is at https://developers.facebook.com/tools/explorer/
-  $likes = idx($facebook->api('/me/likes?limit=10'), 'data', array());
+  //$likes = idx($facebook->api('/me/likes?limit=10'), 'data', array());
 
   // This fetches 4 of your friends.
   $friends = idx($facebook->api('/me/friends?'), 'data', array());
   shuffle($friends);
 
   // And this returns 16 of your photos.
-  $photos = idx($facebook->api('/me/photos?limit=16'), 'data', array());
+ // $photos = idx($facebook->api('/me/photos?limit=16'), 'data', array());
 
   // Here is an example of a FQL call that fetches all of your friends that are
   // using this app
@@ -109,7 +109,7 @@ $app_name = idx($app_info, 'name', '');
 
    <script type="text/javascript" src="/javascript/jquery-1.7.1.min.js"></script>
    <script type="text/javascript">
-   function isMatch(String test)
+   function isMatch2(String test)
     {
     if (test == '$name')
        alert("SAME!");
@@ -347,6 +347,13 @@ function testResults (form) {
    }
    else alert ("you failed");
 }
+ function isMatch(String test)
+  {
+  if (test == '$name')
+     alert("SAME!");
+  else
+     alert("No!");
+  }
 </SCRIPT>
 
  </div>
@@ -370,7 +377,7 @@ function testResults (form) {
          <li>
            <form action="http://apps.facebook.com/rajecage/" method="post">
             <input type="text" name="input" value="Guess who!" onclick="this.value ='';">
-            <input type="submit" name="submit" value="Submit" onclick="testResults(this.value);">
+            <input type="submit" name="submit" value="Submit" onclick="isMatch(this.value);">
            </form>
          </li>
 
