@@ -249,8 +249,8 @@ $app_name = idx($app_info, 'name', '');
     </header>
 
     <section id="get-started">
-      <p>Welcome to your Facebook app, it is a piece of shit!</p>
-      <a href="https://devcenter.heroku.com/articles/facebook" target="_top" class="button">Learn How to Edit This App</a>
+      <p>Welcome to Raje Cage!</p>
+      <a href="google.com" target="_top" class="button">Click Here To Begin</a>
     </section>
 
     <?php
