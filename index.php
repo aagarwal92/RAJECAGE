@@ -286,7 +286,7 @@ $app_name = idx($app_info, 'name', '');
      * @param id Element ID of clock placeholder
      * @param timer Total seconds to display clock
      */
-	 timer = 31;
+   timer = 31;
     function countdown(){
         timer--;
         minRemain  = Math.floor(timer / 60);  
@@ -444,3 +444,4 @@ function testResults (form) {
     ?>
   </body>
 </html>
+
