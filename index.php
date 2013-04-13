@@ -229,11 +229,11 @@ $points = 0;
                 <span class="plus">Post to Wall</span>
               </a>
             </li>
-            <li>
+           <!-- <li>
               <a href="#" class="facebook-button speech-bubble" id="sendToFriends" data-url="<?php echo AppInfo::getUrl(); ?>">
                 <span class="speech-bubble">Send Message</span>
               </a>
-            </li>
+            </li>-->
             <li>
               <a href="#" class="facebook-button apprequests" id="sendRequest" data-message="Test this awesome app">
                 <span class="apprequests">Send Requests</span>
@@ -254,6 +254,7 @@ $points = 0;
     <section id="get-started">
       <p>Welcome to Raje Cage!<br>
       Here are some friends of yours. Let's see if you can guess their names.</p>
+      <a href="#" target="_top" class="button">Click to Begin!</a>
     </section>
 
     <?php
@@ -263,7 +264,6 @@ $points = 0;
     <section id="samples" class="clearfix">
       <h1> Take a good look at your friends below. Soon, you'll have to guess who they are.</h1>
       <div class="center">
-        <h3>A few of your friends</h3>
         <ul  style="text-align:center" class="friends">
           <?php
             foreach ($friends as $friend) {
@@ -273,11 +273,11 @@ $points = 0;
           ?>
           <li>
             <a>
-              <img src="https://graph.facebook.com/<?php echo he($id) ?>/picture?type=square" alt="<?php echo he($name); ?>">
+              <img src="https://graph.facebook.com/<?php echo he($id) ?>/picture?width=125&height=125 " alt="<?php echo he($name); ?>">
             </a>
           </li>
           <li>
-             <input type="text" name="input" value="Guess who!"> 
+             <input type="text" name="input" value="Guess who!" onclick="this.value ='';"> 
             <input type="submit" name="submit" value="Submit">
           </li>
 
