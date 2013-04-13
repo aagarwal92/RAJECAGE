@@ -297,7 +297,7 @@ $app_name = idx($app_info, 'name', '');
             </form>
           </li>
 
-          <?php
+          <!--<?php
             if (isset($_POST['input'])){
               $formvalue = $_POST['input'];
               $formvalue = strtolower($formvalue);
@@ -305,7 +305,7 @@ $app_name = idx($app_info, 'name', '');
               } else {
               }
             }
-          ?>
+          ?>-->
         </ul>
       </div>
 
