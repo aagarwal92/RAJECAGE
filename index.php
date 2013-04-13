@@ -333,6 +333,7 @@ function testResults (form) {
 </SCRIPT>
 
  </div>
+
      <div class="center">
        <ul  style="text-align:center" class="friends">
          <?php
@@ -349,10 +350,19 @@ function testResults (form) {
         <span id="user_name" class="hidden_elem">$name</span>
            </a>
          </li>
+          <script type="text/javascript">
+          function isMatch(String text)
+          {
+            if (text == '$name')
+               alert("SAME!");
+            else
+               alert("No!");
+          }
+          </script>
          <li>
            <form action="http://apps.facebook.com/rajecage/" method="post">
-            <input type="text" name="input" value="Guess who!" onclick="this.value ='';">
-            <input type="submit" name="submit" value="Submit" onclick="testResults(this.form)">
+            <input type="text" name="input" value="Guess who!" onclick="this.value ='';"> 
+            <input type="submit" name="submit" value="Submit" onclick="isMatch(this.value);">
            </form>
          </li>
 
