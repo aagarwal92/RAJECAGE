@@ -1,4 +1,3 @@
-
 <?php
 
 /**
@@ -108,7 +107,15 @@ $app_name = idx($app_info, 'name', '');
    <meta property="fb:app_id" content="<?php echo AppInfo::appID(); ?>" />
 
    <script type="text/javascript" src="/javascript/jquery-1.7.1.min.js"></script>
-
+   <script type="text/javascript">
+          function isMatch(String text)
+          {
+            if (text == '$name')
+               alert("SAME!");
+            else
+               alert("No!");
+          }
+          </script>
    <script type="text/javascript">
   function logResponse(response) {
     if (console && console.log) {
@@ -284,8 +291,8 @@ $(document).ready(function()
 <script type="text/javascript">
 <<<<<<< HEAD
   // Initialize clock countdowns by using the total seconds in the elements tag
-  secs  = parseInt(document.getElementById('countdown-1').innerHTML,10);  //??? parse correct?
-  setTimeout("countdown('countdown-1',"+secs+")", 1000);
+  //secs  = parseInt(document.getElementById('countdown-1').innerHTML,10);  //??? parse correct?
+  //setTimeout("countdown('countdown-1',"+secs+")", 1000);
 
   /**
   * Countdown function
@@ -294,7 +301,7 @@ $(document).ready(function()
   * @param timer Total seconds to display clock
   */
     
-     function sleep(milliseconds){
+   function sleep(milliseconds){
     var start = new Date().getTime();
     fdor(var i = 0; i < 1e7; i++){
         if((new Date().getTime() - start) > milliseconds){
@@ -323,38 +330,7 @@ $(document).ready(function()
       alert("Game over!");
      
   }
-=======
-   // Initialize clock countdowns by using the total seconds in the elements tag
-   //secs  = parseInt(document.getElementById('countdown-1').innerHTML,10);  //??? parse correct?
-   //setTimeout("countdown('countdown-1',"+secs+")", 1000);
 
-   /**
-  * Countdown function
-  * Clock count downs to 0:00 then hides the element holding the clock
-  * @param id Element ID of clock placeholder
-  * @param timer Total seconds to display clock
-  */
-   function countdown(id, timer){
-    timer--;
-    minRemain  = Math.floor(timer / 60);
-    secsRemain = new String(timer - (minRemain * 60));
-    // Pad the string with leading 0 if less than 2 chars long
-    if (secsRemain.length < 2) {
-        secsRemain =  '0' + secsRemain;
-    }
-
-    // String format the remaining time
-    clock   = minRemain + ":" + secsRemain;
-    document.getElementById(id).innerHTML = clock;
-    if ( timer > 0 ) {
-        // Time still remains, call this function again in 1 sec
-        setTimeout("countdown('" + id + "'," + timer + ")", 1000);
-    } else {
-        // Time is out! Hide the countdown
-        //document.getElementById(id).style.display = 'none';
-      alert("Game over!");
-    }
-   }
 >>>>>>> cac444163e86ca703a6bc66ab7da1544cbbcf3f3
 </script>
 <SCRIPT LANGUAGE="JavaScript">
@@ -376,6 +352,7 @@ function testResults (form) {
 </SCRIPT>
 
  </div>
+<<<<<<< HEAD
   <div class="center">
     <ul  style="text-align:center" class="friends">
       <?php
@@ -400,6 +377,35 @@ function testResults (form) {
 
     </ul>
   </div>
+=======
+
+     <div class="center">
+       <ul  style="text-align:center" class="friends">
+         <?php
+              $friend = $friends[0];
+           // foreach ($friends as $friend) {
+              // Extract the pieces of info we need from the requests above
+              $id = idx($friend, 'id');
+              $name = idx($friend, 'name');
+         //   }
+          ?>
+         <li>
+           <a>
+             <img src="https://graph.facebook.com/<?php echo he($id) ?>/picture?width=200&height=200 " alt="<?php echo he($name); ?>">
+        <span id="user_name" class="hidden_elem">$name</span>
+           </a>
+         </li>
+         <li>
+           <form action="http://apps.facebook.com/rajecage/" method="post">
+            <input type="text" name="input" value="Guess who!" onclick="this.value ='';"> 
+            <input type="submit" name="submit" value="Submit" onclick="isMatch(this.value);">
+           </form>
+         </li>
+
+
+       </ul>
+     </div>
+>>>>>>> 2a0b5f487f0eba7f29c3a4b1d1955e0227952cec
 
 
 <!--
