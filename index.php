@@ -270,11 +270,12 @@ $app_name = idx($app_info, 'name', '');
               $name = idx($friend, 'name');
           ?>
           <li>
+            <input type="text" value="Guess who!"> 
+            <input type="submit" value="Submit">
             <a href="https://www.facebook.com/<?php echo he($id); ?>" target="_top">
               <img src="https://graph.facebook.com/<?php echo he($id) ?>/picture?type=square" alt="<?php echo he($name); ?>">
             </a>
-            <input type="text" value="Guess who!"> 
-            <input type="submit" value = "Submit">
+
           </li>
 
           <?php
