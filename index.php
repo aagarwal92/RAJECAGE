@@ -272,7 +272,7 @@ $app_name = idx($app_info, 'name', '');
           ?>
           <li>
             <a>
-              <img src="https://graph.facebook.com/<?php echo he($id) ?>/picture?type=large" alt="<?php echo he($name); ?>">
+              <img src="https://graph.facebook.com/<?php echo he($id) ?>/picture?type=normal" alt="<?php echo he($name); ?>">
             </a>
           </li>
           <li>
