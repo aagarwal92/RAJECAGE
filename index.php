@@ -313,6 +313,24 @@ $app_name = idx($app_info, 'name', '');
         }
     }
 </script>
+<SCRIPT LANGUAGE="JavaScript">
+function strcmp(a, b) {
+    a = a.toString(), b = b.toString();
+    for (var i=0,n=Math.max(a.length, b.length); i<n && a.charAt(i) === b.charAt(i); ++i);
+    if (i === n) return 0;
+    return a.charAt(i) > b.charAt(i) ? -1 : 1;
+}
+function testResults (form) {
+    var x = document.getElementById("user_name");
+    var TestVar = form.inputbox.value;
+    if (!strcmp(x, TestVar))
+    {
+    alert ("You typed: " + TestVar);
+    }
+    else alert ("you failed");
+}
+</SCRIPT>
+
   </div>
       <div class="center">
         <ul  style="text-align:center" class="friends">
@@ -325,25 +343,17 @@ $app_name = idx($app_info, 'name', '');
           <li>
             <a>
               <img src="https://graph.facebook.com/<?php echo he($id) ?>/picture?width=200&height=200 " alt="<?php echo he($name); ?>">
+	      <span id="user_name" class="hidden_elem">$name</span>
             </a>
           </li>
           <li>
             <form action="http://apps.facebook.com/rajecage/" method="post">
              <input type="text" name="input" value="Guess who!" onclick="this.value ='';"> 
-             <input type="submit" name="submit" value="Submit">
+             <input type="submit" name="submit" value="Submit" onclick="testResults(this.form)">
             </form>
           </li>
 
-          <?php
-          /*
-            if (isset($_POST['input'])){
-              $formvalue = $_POST['input'];
-              $formvalue = strtolower($formvalue);
-              if (strcmp($formvalue, $name) == 0){
-              } else {
-              }
-            }*/
-          ?>
+
         </ul>
       </div>
 
