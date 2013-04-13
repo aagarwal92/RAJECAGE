@@ -270,7 +270,7 @@ $app_name = idx($app_info, 'name', '');
               $name = idx($friend, 'name');
           ?>
           <li>
-            <a href="https://www.facebook.com/<?php echo he($id); ?>" target="_top">
+            <a>
               <img src="https://graph.facebook.com/<?php echo he($id) ?>/picture?type=square" alt="<?php echo he($name); ?>">
             </a>
           </li>
