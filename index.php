@@ -314,8 +314,8 @@ $app_name = idx($app_info, 'name', '');
     }
 </script>
   </div>
-      <div class="center">
-        <ul  style="text-align:center" class="friends">
+      <div style="text-align:center" class="center">
+        <ul class="friends">
           <?php
             foreach ($friends as $friend) {
               // Extract the pieces of info we need from the requests above
