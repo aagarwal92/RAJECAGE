@@ -287,8 +287,10 @@ $app_name = idx($app_info, 'name', '');
             </a>
           </li>
           <li>
+            <form action="" method="post">
              <input type="text" name="input" value="Guess who!" onclick="this.value ='';"> 
-            <input type="submit" name="submit" value="Submit">
+             <input type="submit" name="submit" value="Submit">
+            </form>
           </li>
 
           <?php
