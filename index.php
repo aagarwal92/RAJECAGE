@@ -308,7 +308,8 @@ $app_name = idx($app_info, 'name', '');
             setTimeout("countdown('" + id + "'," + timer + ")", 1000);
         } else {
             // Time is out! Hide the countdown
-            document.getElementById(id).style.display = 'none';
+           //document.getElementById(id).style.display = 'none';
+          alert("Game over!");
         }
     }
 </script>
