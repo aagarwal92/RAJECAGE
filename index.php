@@ -288,7 +288,7 @@ $(document).ready(function()
   <div class="timer" style="text-align:center">
       <span id="countdown-1">30 seconds</span>
 <script type="text/javascript">
-<<<<<<< HEAD
+
   // Initialize clock countdowns by using the total seconds in the elements tag
   //secs  = parseInt(document.getElementById('countdown-1').innerHTML,10);  //??? parse correct?
   //setTimeout("countdown('countdown-1',"+secs+")", 1000);
@@ -330,7 +330,7 @@ $(document).ready(function()
      
   }
 
->>>>>>> cac444163e86ca703a6bc66ab7da1544cbbcf3f3
+
 </script>
 <SCRIPT LANGUAGE="JavaScript">
 function strcmp(a, b) {
@@ -351,7 +351,6 @@ function testResults (form) {
 </SCRIPT>
 
  </div>
-<<<<<<< HEAD
   <div class="center">
     <ul  style="text-align:center" class="friends">
       <?php
@@ -376,7 +375,6 @@ function testResults (form) {
 
     </ul>
   </div>
-=======
 
      <div class="center">
        <ul  style="text-align:center" class="friends">
@@ -404,7 +402,6 @@ function testResults (form) {
 
        </ul>
      </div>
->>>>>>> 2a0b5f487f0eba7f29c3a4b1d1955e0227952cec
 
 
 <!--
