@@ -262,14 +262,14 @@ $app_name = idx($app_info, 'name', '');
       <h1> Take a good look at your friends below. Soon, you'll have to guess who they are.</h1>
       <div class="center">
         <h3>A few of your friends</h3>
-        <ul class="friends">
+        <ul  style="text-align:center" class="friends">
           <?php
             foreach ($friends as $friend) {
               // Extract the pieces of info we need from the requests above
               $id = idx($friend, 'id');
               $name = idx($friend, 'name');
           ?>
-          <li type="center">
+          <li>
             <a href="https://www.facebook.com/<?php echo he($id); ?>" target="_top">
               <img src="https://graph.facebook.com/<?php echo he($id) ?>/picture?type=square" alt="<?php echo he($name); ?>">
             </a>
