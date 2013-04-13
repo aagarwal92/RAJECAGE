@@ -335,19 +335,10 @@ function testResults (form) {
      <div class="center">
        <ul  style="text-align:center" class="friends">
          <?php
-  //         $i = 0;
-         // while ($i == 0) 
-          // {
-          //   $friend = $friends[0];
-        //     $i++;
-        //  }
-       //   $id = idx($friend, 'id');
-       //   $name = idx($friend, 'name');
             foreach ($friends as $friend) {
-             Extract the pieces of info we need from the requests above
+              // Extract the pieces of info we need from the requests above
               $id = idx($friend, 'id');
               $name = idx($friend, 'name');
-            }
           ?>
          <li>
            <a>
@@ -442,3 +433,4 @@ function testResults (form) {
     ?>
  </body>
 </html>
+
