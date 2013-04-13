@@ -291,7 +291,7 @@ $(document).ready(function()
    </section>
 
    <?php
-      if ($user_id) {
+   //   if ($user_id) {
     ?>
 
    <section id="samples" class="clearfix">
@@ -449,7 +449,7 @@ function testResults (form) {
 -->
    <?php
       //}
-    }
+   // }
     ?>
  </body>
 </html>
