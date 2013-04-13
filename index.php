@@ -336,6 +336,7 @@ function testResults (form) {
            while ($i = 0) 
            {
              $friends[0];
+             $i++;
           }
    //         foreach ($friends as $friend) {
             // Extract the pieces of info we need from the requests above
