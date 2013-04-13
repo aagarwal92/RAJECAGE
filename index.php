@@ -268,7 +268,7 @@ $(document).ready(function()
    <section id="get-started">
   <p>Welcome to Raje Cage!<br>
   Here are some friends of yours. Let's see if you can guess their names.</p>
-  <a href="#" target="_top" onclick="return false" id="click" class="button">Click to Begin!</a>
+  <a href="#" target="_top" onclick="return false; countdown()" id="click" class="button">Click to Begin!</a>
   <a href="#" target="_top" onclick="return false" id="reset" class="button">Reset</a>
 
    </section>
@@ -325,8 +325,8 @@ $(document).ready(function()
   }
 =======
    // Initialize clock countdowns by using the total seconds in the elements tag
-   secs  = parseInt(document.getElementById('countdown-1').innerHTML,10);  //??? parse correct?
-   setTimeout("countdown('countdown-1',"+secs+")", 1000);
+   //secs  = parseInt(document.getElementById('countdown-1').innerHTML,10);  //??? parse correct?
+   //setTimeout("countdown('countdown-1',"+secs+")", 1000);
 
    /**
   * Countdown function
