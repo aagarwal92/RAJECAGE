@@ -250,7 +250,8 @@ $app_name = idx($app_info, 'name', '');
 
     
     <section id="get-started">
-      <p>Welcome to Raje Cage!</p>
+      <p>Welcome to Raje Cage!<br>
+      Here are some friends of yours. Let's see if you can guess their names.</p>
     </section>
 
     <?php
@@ -258,8 +259,7 @@ $app_name = idx($app_info, 'name', '');
     ?>
 
     <section id="samples" class="clearfix">
-      <h1>Here are some friends of yours. Let's see if you can guess their names.</h1>
-
+      <h1> Take a good look at your friends below. Soon, you'll have to guess who they are.</h1>
       <div class="list">
         <h3>A few of your friends</h3>
         <ul class="friends">
