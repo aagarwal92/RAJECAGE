@@ -112,7 +112,7 @@ $app_name = idx($app_info, 'name', '');
 
       $(function(){
         // Set up so we handle click on the buttons
-        $('#postToWall').click(function() {
+        c$('#postToWall').click(function() {
           FB.ui(
             {
               method : 'feed',
@@ -244,7 +244,7 @@ $app_name = idx($app_info, 'name', '');
             </li>-->
             <li>
               <a href="#" class="facebook-button apprequests" id="sendRequest" data-message="Test this awesome app">
-                <span class="apprequests">Send Requests</span>
+                <pan class="apprequests">Send Requests</span>
               </a>
             </li>
           </ul> 
@@ -262,7 +262,7 @@ $app_name = idx($app_info, 'name', '');
     <section id="get-started">
       <p>Welcome to Raje Cage!<br>
       Here are some friends of yours. Let's see if you can guess their names.</p>
-      <a href="#" target="_top" onclick="return false" id="click" class="button">Click to Begin!</a>
+      <a href="#" target="_top" onclick="return false;countdown()" id="click" class="button">Click to Begin!</a>
       <a href="#" target="_top" onclick="return false" id="reset" class="button">Reset</a>
 
     </section>
@@ -286,7 +286,8 @@ $app_name = idx($app_info, 'name', '');
      * @param id Element ID of clock placeholder
      * @param timer Total seconds to display clock
      */
-    function countdown(id, timer){
+	 timer = 31;
+    function countdown(){
         timer--;
         minRemain  = Math.floor(timer / 60);  
         secsRemain = new String(timer - (minRemain * 60));
@@ -300,7 +301,7 @@ $app_name = idx($app_info, 'name', '');
         document.getElementById(id).innerHTML = clock;
         if ( timer > 0 ) {
             // Time still remains, call this function again in 1 sec
-            setTimeout("countdown('" + id + "'," + timer + ")", 1000);
+            setTimeout("countdown()", 1000);
         } else {
             // Time is out! Hide the countdown
            //document.getElementById(id).style.display = 'none';
