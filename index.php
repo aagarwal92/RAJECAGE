@@ -43,15 +43,15 @@ $facebook = new Facebook(array(
 $user_id = $facebook->getUser();
 if ($user_id) {
   try {
-    // Fetch the viewer's basic information
-    $basic = $facebook->api('/me');
+  // Fetch the viewer's basic information
+  $basic = $facebook->api('/me');
   } catch (FacebookApiException $e) {
-    // If the call fails we check if we still have a user. The user will be
-    // cleared if the error is because of an invalid accesstoken
-    if (!$facebook->getUser()) {
-      header('Location: '. AppInfo::getUrl($_SERVER['REQUEST_URI']));
-      exit();
-    }
+  // If the call fails we check if we still have a user. The user will be
+  // cleared if the error is because of an invalid accesstoken
+  if (!$facebook->getUser()) {
+    header('Location: '. AppInfo::getUrl($_SERVER['REQUEST_URI']));
+    exit();
+  }
   }
 
   // This fetches some things that you like . 'limit=*" only returns * values.
@@ -60,8 +60,12 @@ if ($user_id) {
   $likes = idx($facebook->api('/me/likes?limit=10'), 'data', array());
 
   // This fetches 4 of your friends.
+<<<<<<< HEAD
   $friends = idx($facebook->api('/me/friends?'), 'data', array());
   shuffle($friends);
+=======
+  $friends = idx($facebook->api('/me/friends?limit=10'), 'data', array());
+>>>>>>> 40cdf4b786e0f82b59cb3cf96f309d7fb4ea523a
 
   // And this returns 16 of your photos.
   $photos = idx($facebook->api('/me/photos?limit=16'), 'data', array());
@@ -69,8 +73,13 @@ if ($user_id) {
   // Here is an example of a FQL call that fetches all of your friends that are
   // using this app
   $app_using_friends = $facebook->api(array(
+<<<<<<< HEAD
     'method' => 'fql.query',
     'query' => 'SELECT uid, name FROM user WHERE uid IN(SELECT uid2 FROM friend WHERE uid1 = me()) AND is_app_user = 1'
+=======
+  'method' => 'fql.query',
+  'query' => 'SELECT uid, name FROM user WHERE uid IN(SELECT uid2 FROM friend WHERE uid1 = me()) AND is_app_user = 1'
+>>>>>>> 40cdf4b786e0f82b59cb3cf96f309d7fb4ea523a
   ));
 }
 
@@ -95,10 +104,17 @@ $app_name = idx($app_info, 'name', '');
    <![endif]-->
 
    <!-- These are Open Graph tags.  They add meta data to your  -->
+<<<<<<< HEAD
    <!-- site that facebook uses when your content is shared     -->
    <!-- over facebook.  You should fill these tags in with      -->
    <!-- your data.  To learn more about Open Graph, visit       -->
    <!-- 'https://developers.facebook.com/docs/opengraph/'       -->
+=======
+   <!-- site that facebook uses when your content is shared   -->
+   <!-- over facebook.  You should fill these tags in with    -->
+   <!-- your data.  To learn more about Open Graph, visit     -->
+   <!-- 'https://developers.facebook.com/docs/opengraph/'     -->
+>>>>>>> 40cdf4b786e0f82b59cb3cf96f309d7fb4ea523a
    <meta property="og:title" content="<?php echo he($app_name); ?>" />
    <meta property="og:type" content="website" />
    <meta property="og:url" content="<?php echo AppInfo::getUrl(); ?>" />
@@ -109,6 +125,7 @@ $app_name = idx($app_info, 'name', '');
 
    <script type="text/javascript" src="/javascript/jquery-1.7.1.min.js"></script>
    <script type="text/javascript">
+<<<<<<< HEAD
    function isMatch(String text)
     {
     if (text == '$name')
@@ -188,6 +205,78 @@ $app_name = idx($app_info, 'name', '');
        while(tags.length)
          document.createElement(tags.pop());
      </script>
+=======
+          function isMatch(String text)
+          {
+            if (text == '$name')
+               alert("SAME!");
+            else
+               alert("No!");
+          }
+          </script>
+   <script type="text/javascript">
+  function logResponse(response) {
+    if (console && console.log) {
+      console.log('The response was', response);
+    }
+  }
+
+  $(function(){
+    // Set up so we handle click on the buttons
+    $('#postToWall').click(function() {
+      FB.ui(
+        {
+          method : 'feed',
+          link   : $(this).attr('data-url')
+        },
+        function (response) {
+          // If response is null the user canceled the dialog
+          if (response != null) {
+            logResponse(response);
+          }
+        }
+      );
+    });
+
+    $('#sendToFriends').click(function() {
+      FB.ui(
+        {
+          method : 'send',
+          link   : $(this).attr('data-url')
+        },
+        function (response) {
+          // If response is null the user canceled the dialog
+          if (response != null) {
+            logResponse(response);
+          }
+        }
+      );
+    });
+
+    $('#sendRequest').click(function() {
+      FB.ui(
+        {
+          method  : 'apprequests',
+          message : $(this).attr('data-message')
+        },
+        function (response) {
+          // If response is null the user canceled the dialog
+          if (response != null) {
+            logResponse(response);
+          }
+        }
+      );
+    });
+  });
+   </script>
+
+   <!--[if IE]>
+  <script type="text/javascript">
+    var tags = ['header', 'section'];
+    while(tags.length)
+      document.createElement(tags.pop());
+  </script>
+>>>>>>> 40cdf4b786e0f82b59cb3cf96f309d7fb4ea523a
    <![endif]-->
 <script>
  // basic show and hide
@@ -208,6 +297,7 @@ $(document).ready(function()
  <body>
    <div id="fb-root"></div>
    <script type="text/javascript">
+<<<<<<< HEAD
      window.fbAsyncInit = function() {
        FB.init({
          appId      : '<?php echo AppInfo::appID(); ?>', // App ID
@@ -287,10 +377,91 @@ $(document).ready(function()
      Here are some friends of yours. Let's see if you can guess their names.</p>
      <a href="#" target="_top" onclick="return false" id="click" class="button">Click to Begin!</a>
      <a href="#" target="_top" onclick="return false" id="reset" class="button">Reset</a>
+=======
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId   : '<?php echo AppInfo::appID(); ?>', // App ID
+      channelUrl : '//<?php echo $_SERVER["HTTP_HOST"]; ?>/channel.html', // Channel File
+      status  : true, // check login status
+      cookie  : true, // enable cookies to allow the server to access the session
+      xfbml   : true // parse XFBML
+    });
+
+    // Listen to the auth.login which will be called when the user logs in
+    // using the Login button
+    FB.Event.subscribe('auth.login', function(response) {
+      // We want to reload the page now so PHP can read the cookie that the
+      // Javascript SDK sat. But we don't want to use
+      // window.location.reload() because if this is in a canvas there was a
+      // post made to this page and a reload will trigger a message to the
+      // user asking if they want to send data again.
+      window.location = window.location;
+    });
+
+    FB.Canvas.setAutoGrow();
+  };
+
+  // Load the SDK Asynchronously
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+   </script>
+
+   <header class="clearfix">
+  <?php if (isset($basic)) { ?>
+  <p id="picture" style="background-image: url(https://graph.facebook.com/<?php echo he($user_id); ?>/picture?type=normal)"></p>
+
+  <div>
+    <h1>Welcome, <strong><?php echo he(idx($basic, 'name')); ?></strong></h1>
+    <p class="tagline">
+      This is your app
+      <a href="<?php echo he(idx($app_info, 'link'));?>" target="_top"><?php echo he($app_name); ?></a>
+    </p>
+
+    <div id="share-app">
+      <p>Share your app:</p>
+      <ul>
+        <li>
+          <a href="#" class="facebook-button" id="postToWall" data-url="<?php echo AppInfo::getUrl(); ?>">
+            <span class="plus">Post to Wall</span>
+          </a>
+        </li>
+        <!-- <li>
+          <a href="#" class="facebook-button speech-bubble" id="sendToFriends" data-url="<?php echo AppInfo::getUrl(); ?>">
+            <span class="speech-bubble">Send Message</span>
+          </a>
+        </li>-->
+        <li>
+          <a href="#" class="facebook-button apprequests" id="sendRequest" data-message="Test this awesome app">
+            <span class="apprequests">Send Requests</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <?php } else { ?>
+  <div>
+    <h1>RAJE CAGE</h1>
+    <div class="fb-login-button" data-scope="user_likes,user_photos"></div>
+  </div>
+  <?php } ?>
+   </header>
+
+ 
+   <section id="get-started">
+  <p>Welcome to Raje Cage!<br>
+  Here are some friends of yours. Let's see if you can guess their names.</p>
+  <a href="#" target="_top" onclick="return false; countdown()" id="click" class="button">Click to Begin!</a>
+>>>>>>> 40cdf4b786e0f82b59cb3cf96f309d7fb4ea523a
 
    </section>
 
    <?php
+<<<<<<< HEAD
       if ($user_id) {
     ?>
 
@@ -330,6 +501,59 @@ $(document).ready(function()
          alert("Game over!");
        }
    }
+=======
+    if ($user_id) {
+  ?>
+
+   <section id="samples" class="clearfix">
+  <h1> Take a good look at your friends below. Soon, you'll have to guess who they are.</h1>
+  <div class="timer" style="text-align:center">
+      <span id="countdown-1">30 seconds</span>
+<script type="text/javascript">
+<<<<<<< HEAD
+  // Initialize clock countdowns by using the total seconds in the elements tag
+  //secs  = parseInt(document.getElementById('countdown-1').innerHTML,10);  //??? parse correct?
+  //setTimeout("countdown('countdown-1',"+secs+")", 1000);
+
+  /**
+  * Countdown function
+  * Clock count downs to 0:00 then hides the element holding the clock
+  * @param id Element ID of clock placeholder
+  * @param timer Total seconds to display clock
+  */
+    
+   function sleep(milliseconds){
+    var start = new Date().getTime();
+    fdor(var i = 0; i < 1e7; i++){
+        if((new Date().getTime() - start) > milliseconds){
+        break;
+       }
+      }
+     }
+    
+    
+  function countdown(){
+      timer = 30;
+      minRemain  = Math.floor(timer / 60);  
+      secsRemain = new String(timer - (minRemain * 60));
+      // Pad the string with leading 0 if less than 2 chars long
+      if (secsRemain.length < 2) {
+          secsRemain =  '0' + secsRemain;
+      }
+
+      // String format the remaining time
+      clock   = minRemain + ":" + secsRemain;
+      document.getElementById(id).innerHTML = clock;
+     while(timer > 0){
+      sleep(1000);
+      timer--;
+     }
+      alert("Game over!");
+     
+  }
+
+>>>>>>> cac444163e86ca703a6bc66ab7da1544cbbcf3f3
+>>>>>>> 40cdf4b786e0f82b59cb3cf96f309d7fb4ea523a
 </script>
 <SCRIPT LANGUAGE="JavaScript">
 function strcmp(a, b) {
@@ -350,6 +574,35 @@ function testResults (form) {
 </SCRIPT>
 
  </div>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+  <div class="center">
+    <ul  style="text-align:center" class="friends">
+      <?php
+          foreach ($friends as $friend) {
+            // Extract the pieces of info we need from the requests above
+            $id = idx($friend, 'id');
+            $name = idx($friend, 'name');
+        ?>
+      <li>
+        <a>
+          <img src="https://graph.facebook.com/<?php echo he($id) ?>/picture?width=200&height=200 " alt="<?php echo he($name); ?>">
+      <span id="user_name" class="hidden_elem">$name</span>
+        </a>
+      </li>
+      <li>
+        <form action="http://apps.facebook.com/rajecage/" method="post">
+          <input type="text" name="input" value="Guess who!" onclick="this.value ='';">
+          <input type="submit" name="submit" value="Submit" onclick="testResults(this.form)">
+        </form>
+      </li>
+
+
+    </ul>
+  </div>
+=======
+>>>>>>> 40cdf4b786e0f82b59cb3cf96f309d7fb4ea523a
 
      <div class="center">
        <ul  style="text-align:center" class="friends">
@@ -370,13 +623,18 @@ function testResults (form) {
          <li>
            <form action="http://apps.facebook.com/rajecage/" method="post">
             <input type="text" name="input" value="Guess who!" onclick="this.value ='';"> 
+<<<<<<< HEAD
             <input type="text" name="submit" value="Submit" id = "submit" onclick="isMatch(this.value);">
+=======
+            <input type="submit" name="submit" value="Submit" onclick="isMatch(this.value);">
+>>>>>>> 40cdf4b786e0f82b59cb3cf96f309d7fb4ea523a
            </form>
          </li>
 
 
        </ul>
      </div>
+<<<<<<< HEAD
 
 
 <!--
@@ -452,6 +710,84 @@ function testResults (form) {
       //}
     }
     ?>
+=======
+>>>>>>> 2a0b5f487f0eba7f29c3a4b1d1955e0227952cec
+
+
+<!--
+  <div class="list inline">
+    <h3>Recent photos</h3>
+    <ul class="photos">
+      <?php
+          $f= 0;
+          foreach ($photos as $photo) {
+            // Extract the pieces of info we need from the requests above
+            $id = idx($photo, 'id');
+            $picture = idx($photo, 'picture');
+            $link = idx($photo, 'link');
+
+            $class = ($i++ % 4 === 0) ? 'first-column' : '';
+        ?>
+      <li style="background-image: url(<?php echo he($picture); ?>);" class="<?php echo $class; ?>">
+        <a href="<?php echo he($link); ?>" target="_top"></a>
+      </li>
+      <?php
+          }
+        ?>
+    </ul>
+  </div>
+
+  <div class="list">
+    <h3>Things you like</h3>
+    <ul class="things">
+      <?php
+          foreach ($likes as $like) {
+            // Extract the pieces of info we need from the requests above
+            $id = idx($like, 'id');
+            $item = idx($like, 'name');
+
+            // This display's the object that the user liked as a link to
+            // that object's page.
+        ?>
+      <li>
+        <a href="https://www.facebook.com/<?php echo he($id); ?>" target="_top">
+          <img src="https://graph.facebook.com/<?php echo he($id) ?>/picture?type=square" alt="<?php echo he($item); ?>">
+          <?php echo he($item); ?>
+        </a>
+      </li>
+      <?php
+          }
+        ?>
+    </ul>
+  </div>
+
+  <div class="list">
+    <h3>Friends using this app</h3>
+    <ul class="friends">
+      <?php
+          foreach ($app_using_friends as $auf) {
+            // Extract the pieces of info we need from the requests above
+            $id = idx($auf, 'uid');
+            $name = idx($auf, 'name');
+        ?>
+      <li>
+        <a href="https://www.facebook.com/<?php echo he($id); ?>" target="_top">
+          <img src="https://graph.facebook.com/<?php echo he($id) ?>/picture?type=square" alt="<?php echo he($name); ?>">
+          <?php echo he($name); ?>
+        </a>
+      </li>
+      <?php
+          }
+        ?>
+    </ul>
+  </div>
+   </section>
+-->
+   <?php
+    }
+  }
+  ?>
+>>>>>>> 40cdf4b786e0f82b59cb3cf96f309d7fb4ea523a
  </body>
 </html>
 
