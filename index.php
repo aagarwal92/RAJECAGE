@@ -330,13 +330,7 @@ function testResults (form) {
    }
    else alert ("you failed");
 }
- function isMatch(test)
-  {
-  if (test  == '<?php echo $name; ?>')
-     alert("SAME!");
-  else
-     alert('<?php echo "test".$name; ?>');
-  }
+
 </SCRIPT>
 
  </div>
@@ -367,6 +361,14 @@ function testResults (form) {
        </ul>
      </div>
 
+
+ function isMatch(test)
+  {
+  if (test  == '<?php echo $name; ?>')
+     alert("SAME!");
+  else
+     alert('<?php echo "test".$name; ?>');
+  }
 
 <!--
      <div class="list inline">
