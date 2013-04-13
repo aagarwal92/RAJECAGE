@@ -172,6 +172,9 @@ $app_name = idx($app_info, 'name', '');
       </script>
     <![endif]-->
   </head>
+  $(document).ready(function() {
+     $(#samples).hide();
+   });
   <body>
     <div id="fb-root"></div>
     <script type="text/javascript">
