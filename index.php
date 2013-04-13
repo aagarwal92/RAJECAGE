@@ -272,7 +272,6 @@ $app_name = idx($app_info, 'name', '');
           <li>
             <a href="https://www.facebook.com/<?php echo he($id); ?>" target="_top">
               <img src="https://graph.facebook.com/<?php echo he($id) ?>/picture?type=square" alt="<?php echo he($name); ?>">
-              <?php echo he($name); ?>
             </a>
           </li>
           <?php
@@ -280,6 +279,7 @@ $app_name = idx($app_info, 'name', '');
           ?>
         </ul>
       </div>
+
 
 <!--
       <div class="list inline">
@@ -327,7 +327,7 @@ $app_name = idx($app_info, 'name', '');
           ?>
         </ul>
       </div>
--->
+
       <div class="list">
         <h3>Friends using this app</h3>
         <ul class="friends">
@@ -349,7 +349,7 @@ $app_name = idx($app_info, 'name', '');
         </ul>
       </div>
     </section>
-
+-->
     <?php
       }
     ?>
