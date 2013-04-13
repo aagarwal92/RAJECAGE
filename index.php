@@ -276,7 +276,6 @@ $(document).ready(function()
   <p>Welcome to Raje Cage!<br>
   Here are some friends of yours. Let's see if you can guess their names.</p>
   <a href="#" target="_top" onclick="return false; countdown()" id="click" class="button">Click to Begin!</a>
-  <a href="#" target="_top" onclick="return false" id="reset" class="button">Reset</a>
 
    </section>
 
