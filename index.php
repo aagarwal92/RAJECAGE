@@ -57,21 +57,16 @@ if ($user_id) {
   // This fetches some things that you like . 'limit=*" only returns * values.
   // To see the format of the data you are retrieving, use the "Graph API
   // Explorer" which is at https://developers.facebook.com/tools/explorer/
-  $likes = idx($facebook->api('/me/likes?limit=10'), 'data', array());
+
 
   // This fetches 4 of your friends.
   $friends = idx($facebook->api('/me/friends?limit=10'), 'data', array());
 
   // And this returns 16 of your photos.
-  $photos = idx($facebook->api('/me/photos?limit=16'), 'data', array());
 
   // Here is an example of a FQL call that fetches all of your friends that are
   // using this app
-  $app_using_friends = $facebook->api(array(
-    'method' => 'fql.query',
-    'query' => 'SELECT uid, name FROM user WHERE uid IN(SELECT uid2 FROM friend WHERE uid1 = me()) AND is_app_user = 1'
-  ));
-}
+
 
 // Fetch the basic info of the app that they are using
 $app_info = $facebook->api('/'. AppInfo::appID());
@@ -252,7 +247,7 @@ $app_name = idx($app_info, 'name', '');
                 <span class="apprequests">Send Requests</span>
               </a>
             </li>
-          </ul>
+          </ul> 
         </div>
       </div>
       <?php } else { ?>
@@ -314,8 +309,8 @@ $app_name = idx($app_info, 'name', '');
     }
 </script>
   </div>
-      <div style="text-align:center" class="center">
-        <ul class="friends">
+      <div class="center" style="text-align:center" >
+        <ul style="text-align:center" class="friends">
           <?php
             foreach ($friends as $friend) {
               // Extract the pieces of info we need from the requests above
@@ -327,7 +322,7 @@ $app_name = idx($app_info, 'name', '');
               <img src="https://graph.facebook.com/<?php echo he($id) ?>/picture?width=200&height=200 " alt="<?php echo he($name); ?>">
             </a>
           </li>
-          <li>
+          <li style="text-align:center" >
             <form action="http://apps.facebook.com/rajecage/" method="post">
              <input type="text" name="input" value="Guess who!" onclick="this.value ='';"> 
              <input type="submit" name="submit" value="Submit">
