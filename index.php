@@ -361,7 +361,7 @@ function testResults (form) {
        </ul>
      </div>
 
-
+<SCRIPT LANGUAGE="JavaScript">
  function isMatch(test)
   {
   if (test  == '<?php echo $name; ?>')
@@ -369,7 +369,7 @@ function testResults (form) {
   else
      alert('<?php echo "test".$name; ?>');
   }
-
+</script>
 <!--
      <div class="list inline">
        <h3>Recent photos</h3>
