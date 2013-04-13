@@ -330,13 +330,12 @@ function testResults (form) {
    }
    else alert ("you failed");
 }
-
  function isMatch(test)
   {
-  if (test == $name)
+  if (test == <?php $name ?>)
      alert("SAME!");
   else
-     alert($name);
+     alert(<?php $name ?>);
   }
 </SCRIPT>
 
