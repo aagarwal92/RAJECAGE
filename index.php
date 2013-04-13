@@ -278,7 +278,7 @@ $app_name = idx($app_info, 'name', '');
 
     <section id="samples" class="clearfix">
       <h1> Take a good look at your friends below. Soon, you'll have to guess who they are.</h1>
-      <div class="center">
+      <div class="timer" style="text-align:center">
           <span id="countdown-1">30 seconds</span>
 <script type="text/javascript">
     // Initialize clock countdowns by using the total seconds in the elements tag
@@ -312,6 +312,7 @@ $app_name = idx($app_info, 'name', '');
         }
     }
 </script>
+  </div>
       <div class="center">
         <ul  style="text-align:center" class="friends">
           <?php
@@ -322,7 +323,7 @@ $app_name = idx($app_info, 'name', '');
           ?>
           <li>
             <a>
-              <img src="https://graph.facebook.com/<?php echo he($id) ?>/picture?width=125&height=125 " alt="<?php echo he($name); ?>">
+              <img src="https://graph.facebook.com/<?php echo he($id) ?>/picture?width=200&height=200 " alt="<?php echo he($name); ?>">
             </a>
           </li>
           <li>
