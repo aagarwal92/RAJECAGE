@@ -275,7 +275,7 @@ $(document).ready(function()
    <section id="get-started">
   <p>Welcome to Raje Cage!<br>
   Here are some friends of yours. Let's see if you can guess their names.</p>
-  <a href="#" target="_top" onclick="return false; countdown()" id="click" class="button">Click to Begin!</a>
+  <a href="#" target="_top" onclick="return false;countdown()" id="click" class="button">Click to Begin!</a>
 
    </section>
 
@@ -311,8 +311,11 @@ $(document).ready(function()
     
     
   function countdown(){
-      timer = 30;
-      minRemain  = Math.floor(timer / 60);  
+    timer = 30;
+    while(timer > 0){
+      sleep(1000);
+      timer--;
+	  minRemain  = Math.floor(timer / 60);  
       secsRemain = new String(timer - (minRemain * 60));
       // Pad the string with leading 0 if less than 2 chars long
       if (secsRemain.length < 2) {
@@ -322,10 +325,9 @@ $(document).ready(function()
       // String format the remaining time
       clock   = minRemain + ":" + secsRemain;
       document.getElementById(id).innerHTML = clock;
-     while(timer > 0){
-      sleep(1000);
-      timer--;
+	  
      }
+
       alert("Game over!");
      
   }
