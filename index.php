@@ -171,21 +171,7 @@ $app_name = idx($app_info, 'name', '');
           document.createElement(tags.pop());
       </script>
     <![endif]-->
- <script>
-  // basic show and hide
- $(document).ready(function() 
- {
-   $('#samples').hide();
-   $('#reset').hide();
-   $('#click').click( function() 
-   {
-    $('#samples').toggle();
-    $('#reset').show();
-   });
-});
-</script>
   </head>
-
   <body>
     <div id="fb-root"></div>
     <script type="text/javascript">
@@ -241,11 +227,11 @@ $app_name = idx($app_info, 'name', '');
                 <span class="plus">Post to Wall</span>
               </a>
             </li>
-           <!-- <li>
+            <li>
               <a href="#" class="facebook-button speech-bubble" id="sendToFriends" data-url="<?php echo AppInfo::getUrl(); ?>">
                 <span class="speech-bubble">Send Message</span>
               </a>
-            </li>-->
+            </li>
             <li>
               <a href="#" class="facebook-button apprequests" id="sendRequest" data-message="Test this awesome app">
                 <span class="apprequests">Send Requests</span>
@@ -266,18 +252,50 @@ $app_name = idx($app_info, 'name', '');
     <section id="get-started">
       <p>Welcome to Raje Cage!<br>
       Here are some friends of yours. Let's see if you can guess their names.</p>
-      <a href="#" target="_top" id="click" class="button">Click to Begin!</a>
-      <a href="#" target="_top" id="reset" class="button">Reset</a>
-
     </section>
 
     <?php
       if ($user_id) {
     ?>
+    
+<span id="countdown-1">30 seconds</span>
+<script type="text/javascript">
+    // Initialize clock countdowns by using the total seconds in the elements tag
+    secs  = parseInt(document.getElementById('countdown-1').innerHTML,10);  //??? parse correct?
+    setTimeout("countdown('countdown-1',"+secs+")", 1000);
+
+    /**
+     * Countdown function
+     * Clock count downs to 0:00 then hides the element holding the clock
+     * @param id Element ID of clock placeholder
+     * @param timer Total seconds to display clock
+     */
+    function countdown(id, timer){
+        timer--;
+        minRemain  = Math.floor(timer / 60);  
+        secsRemain = new String(timer - (minRemain * 60));
+        // Pad the string with leading 0 if less than 2 chars long
+        if (secsRemain.length <= 2) {
+            secsRemain = '0' + secsRemain;
+        }
+
+        // String format the remaining time
+        clock      = minRemain + ":" + secsRemain;
+        document.getElementById(id).innerHTML = clock;
+        if ( timer > 0 ) {
+            // Time still remains, call this function again in 1 sec
+            setTimeout("countdown('" + id + "'," + timer + ")", 1000);
+        } else {
+            // Time is out! Hide the countdown
+            document.getElementById(id).style.display = 'none';
+        }
+    }
+</script>
 
     <section id="samples" class="clearfix">
       <h1> Take a good look at your friends below. Soon, you'll have to guess who they are.</h1>
       <div class="center">
+        <h3>A few of your friends</h3>
         <ul  style="text-align:center" class="friends">
           <?php
             foreach ($friends as $friend) {
@@ -287,25 +305,16 @@ $app_name = idx($app_info, 'name', '');
           ?>
           <li>
             <a>
-              <img src="https://graph.facebook.com/<?php echo he($id) ?>/picture?width=125&height=125 " alt="<?php echo he($name); ?>">
+              <img src="https://graph.facebook.com/<?php echo he($id) ?>/picture?type=square" alt="<?php echo he($name); ?>">
             </a>
           </li>
           <li>
-            <form action="" method="post">
-             <input type="text" name="input" value="Guess who!" onclick="this.value ='';"> 
-             <input type="submit" name="submit" value="Submit">
-            </form>
+             <input type="text" value="Guess who!" onclick="this.value = '';"> 
+            <input type="submit" value="Submit">
           </li>
 
           <?php
-          /*
-            if (isset($_POST['input'])){
-              $formvalue = $_POST['input'];
-              $formvalue = strtolower($formvalue);
-              if (strcmp($formvalue, $name) == 0){
-              } else {
-              }
-            }*/
+            }
           ?>
         </ul>
       </div>
@@ -382,7 +391,6 @@ $app_name = idx($app_info, 'name', '');
 -->
     <?php
       }
-    }
     ?>
   </body>
 </html>
