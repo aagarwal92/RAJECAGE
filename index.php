@@ -78,6 +78,8 @@ $app_info = $facebook->api('/'. AppInfo::appID());
 
 $app_name = idx($app_info, 'name', '');
 
+$points = 0;
+
 ?>
 <!DOCTYPE html>
 <html xmlns:fb="http://ogp.me/ns/fb#" lang="en">
@@ -275,13 +277,26 @@ $app_name = idx($app_info, 'name', '');
             </a>
           </li>
           <li>
-             <input type="text" value="Guess who!"> 
-            <input type="submit" value="Submit">
+             <input type="text" name="input" value="Guess who!"> 
+            <input type="submit" name="submit" value="Submit">
           </li>
 
           <?php
+            if (isset($_POST['input'])){
+              $formvalue = $_POST['input'];
+              $formvalue = strtolower($formvalue);
+              if (strcmp($formvalue, $name) == 0){
+                $points += 1;
+              } else {
+                $points -= 1;
+              }
             }
           ?>
+
+          <li>
+            <p><?php echo $points; ?></p>
+          </li>
+          
         </ul>
       </div>
 
