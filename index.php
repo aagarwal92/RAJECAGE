@@ -249,10 +249,9 @@ $app_name = idx($app_info, 'name', '');
     </header>
 
     
-    <!--<section id="get-started">
+    <section id="get-started">
       <p>Welcome to Raje Cage!</p>
-      <a href="google.com" target="_top" class="button">Click Here To Begin</a>
-    </section>-->
+    </section>
 
     <?php
       if ($user_id) {
@@ -282,6 +281,7 @@ $app_name = idx($app_info, 'name', '');
         </ul>
       </div>
 
+<!--
       <div class="list inline">
         <h3>Recent photos</h3>
         <ul class="photos">
@@ -327,7 +327,7 @@ $app_name = idx($app_info, 'name', '');
           ?>
         </ul>
       </div>
-
+-->
       <div class="list">
         <h3>Friends using this app</h3>
         <ul class="friends">
