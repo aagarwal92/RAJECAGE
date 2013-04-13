@@ -337,7 +337,7 @@ function testResults (form) {
        <ul  style="text-align:center" class="friends">
          <?php
            $i = 0
-           while ($i = 0) 
+           while ($i == 0) 
            {
              $friends[0];
              $i++;
