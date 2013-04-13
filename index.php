@@ -250,8 +250,8 @@ $app_name = idx($app_info, 'name', '');
 
     
     <section id="get-started">
-      <p>Welcome to Raje Cage!</p>
-      <p><h1>Here are some friends of yours. Let's see if you can guess their names.</h1></p>
+      <p>Welcome to Raje Cage!<br>
+      Here are some friends of yours. Let's see if you can guess their names.</p>
     </section>
 
     <?php
