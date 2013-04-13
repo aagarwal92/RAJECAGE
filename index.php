@@ -171,18 +171,19 @@ $app_name = idx($app_info, 'name', '');
           document.createElement(tags.pop());
       </script>
     <![endif]-->
-  </head>
-  <script>
+ <script>
   // basic show and hide
- $.ready(function() {
+ $(document).ready(function() 
+ {
    $('#samples').hide();
-   });
    $('#click').click( function() 
    {
     $('#samples').show();
    });
  });
 </script>
+  </head>
+
   <body>
     <div id="fb-root"></div>
     <script type="text/javascript">
