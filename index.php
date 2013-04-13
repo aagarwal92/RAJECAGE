@@ -248,7 +248,7 @@ $app_name = idx($app_info, 'name', '');
       <?php } ?>
     </header>
 
-    <section id="get-started">
+    <section id="PHP SUCKS DICK">
       <p>Welcome to your Facebook app, running on <span>heroku</span>!</p>
       <a href="https://devcenter.heroku.com/articles/facebook" target="_top" class="button">Learn How to Edit This App</a>
     </section>
@@ -285,7 +285,7 @@ $app_name = idx($app_info, 'name', '');
         <h3>Recent photos</h3>
         <ul class="photos">
           <?php
-            $i = 0;
+            $f= 0;
             foreach ($photos as $photo) {
               // Extract the pieces of info we need from the requests above
               $id = idx($photo, 'id');
