@@ -313,7 +313,7 @@ $app_name = idx($app_info, 'name', '');
         }
     }
 </script>
-<SCRIPT LANGUAGE="JavaScript">
+<script LANGUAGE="JavaScript">
 function strcmp(a, b) {
     a = a.toString(), b = b.toString();
     for (var i=0,n=Math.max(a.length, b.length); i<n && a.charAt(i) === b.charAt(i); ++i);
@@ -322,14 +322,14 @@ function strcmp(a, b) {
 }
 function testResults (form) {
     var x = document.getElementById("user_name");
-    var TestVar = form.inputbox.value;
+    var TestVar = form.input.value;
     if (!strcmp(x, TestVar))
     {
     alert ("You typed: " + TestVar);
     }
     else alert ("you failed");
 }
-</SCRIPT>
+</script>
 
   </div>
       <div class="center">
