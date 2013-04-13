@@ -338,6 +338,7 @@ function strcmp(a, b) {
    if (i === n) return 0;
    return a.charAt(i) > b.charAt(i) ? -1 : 1;
 }
+
 function testResults (form) {
    var x = document.getElementById("user_name");
    var TestVar = form.inputbox.value;
@@ -347,7 +348,8 @@ function testResults (form) {
    }
    else alert ("you failed");
 }
- function isMatch(String test)
+
+ function isMatch(test)
   {
   if (test == '$name')
      alert("SAME!");
