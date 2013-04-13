@@ -171,7 +171,19 @@ $app_name = idx($app_info, 'name', '');
           document.createElement(tags.pop());
       </script>
     <![endif]-->
+ <script>
+  // basic show and hide
+ $(document).ready(function() 
+ {
+   $('#samples').hide();
+   $('#click').click( function() 
+   {
+    $('#samples').toggle();
+   });
+ });
+</script>
   </head>
+
   <body>
     <div id="fb-root"></div>
     <script type="text/javascript">
@@ -252,7 +264,7 @@ $app_name = idx($app_info, 'name', '');
     <section id="get-started">
       <p>Welcome to Raje Cage!<br>
       Here are some friends of yours. Let's see if you can guess their names.</p>
-      <a href="#" target="_top" class="button">Click to Begin!</a>
+      <a href="#" target="_top" id="click" class="button">Click to Begin!</a>
     </section>
 
     <?php
