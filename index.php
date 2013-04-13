@@ -370,7 +370,7 @@ function testResults (form) {
          <li>
            <form action="http://apps.facebook.com/rajecage/" method="post">
             <input type="text" name="input" value="Guess who!" onclick="this.value ='';"> 
-            <input type="submit" name="submit" value="Submit" id = "submit" onclick="isMatch(this.value);">
+            <input type="text" name="submit" value="Submit" id = "submit" onclick="isMatch(this.value);">
            </form>
          </li>
 
