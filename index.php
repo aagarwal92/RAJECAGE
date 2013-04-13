@@ -337,7 +337,7 @@ function testResults (form) {
           ?>
           <li>
             <a>
-              <img src="https://graph.facebook.com/<?php echo he($id) ?>/picture?width=200&height=200 " alt="<?php echo he($name); ?>">
+              <img style="text-align:center"  src="https://graph.facebook.com/<?php echo he($id) ?>/picture?width=200&height=200 " alt="<?php echo he($name); ?>">
 	      <span id="user_name" class="hidden_elem">$name</span>
             </a>
           </li>
