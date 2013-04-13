@@ -298,8 +298,8 @@ $app_name = idx($app_info, 'name', '');
         minRemain  = Math.floor(timer / 60);  
         secsRemain = new String(timer - (minRemain * 60));
         // Pad the string with leading 0 if less than 2 chars long
-        if (secsRemain.length <= 2) {
-            secsRemain =  secsRemain;
+        if (secsRemain.length < 2) {
+            secsRemain =  '0' + secsRemain;
         }
 
         // String format the remaining time
