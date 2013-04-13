@@ -108,7 +108,23 @@ $app_name = idx($app_info, 'name', '');
    <meta property="fb:app_id" content="<?php echo AppInfo::appID(); ?>" />
 
    <script type="text/javascript" src="/javascript/jquery-1.7.1.min.js"></script>
-   <script type="text/javascript" src="match.js"></script>
+   <script type="text/javascript">
+   /* function isMatch(String text)
+    {
+    if (text == '$name')
+       alert("SAME!");
+    else
+       alert("No!");
+    }*/
+    $(function(){
+      $('#submit').click(function() {
+        if ('$name' == 'A')
+          alert("SADFASDF");
+        else
+          alert("zzzzzz");
+      }
+    }
+   </script>
    <script type="text/javascript">
      function logResponse(response) {
        if (console && console.log) {
@@ -353,7 +369,7 @@ function testResults (form) {
          <li>
            <form action="http://apps.facebook.com/rajecage/" method="post">
             <input type="text" name="input" value="Guess who!" onclick="this.value ='';"> 
-            <input type="submit" name="submit" value="Submit" onclick="isMatch(this.value);">
+            <input type="submit" name="submit" value="Submit" id = "submit">
            </form>
          </li>
 
