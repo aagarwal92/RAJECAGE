@@ -347,6 +347,7 @@ function testResults (form) {
              Extract the pieces of info we need from the requests above
               $id = idx($friend, 'id');
               $name = idx($friend, 'name');
+            }
           ?>
          <li>
            <a>
