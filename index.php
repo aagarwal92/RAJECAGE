@@ -174,7 +174,7 @@ $app_name = idx($app_info, 'name', '');
   </head>
   <script>
   // basic show and hide
- $(document).ready(function() {
+ $.ready(function() {
    $('#samples').hide();
    });
    $('#click').click( function() 
