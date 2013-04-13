@@ -176,13 +176,13 @@ $app_name = idx($app_info, 'name', '');
  $(document).ready(function() 
  {
    $('#samples').hide();
-   $('reset').hide();
+   $('#reset').hide();
    $('#click').click( function() 
    {
     $('#samples').toggle();
     $('#reset').show();
    });
- });
+});
 </script>
   </head>
 
@@ -291,20 +291,21 @@ $app_name = idx($app_info, 'name', '');
             </a>
           </li>
           <li>
-            <form action="" method="post">
+            <form action="http://apps.facebook.com/rajecage/" method="post">
              <input type="text" name="input" value="Guess who!" onclick="this.value ='';"> 
              <input type="submit" name="submit" value="Submit">
             </form>
           </li>
 
           <?php
+          /*
             if (isset($_POST['input'])){
               $formvalue = $_POST['input'];
               $formvalue = strtolower($formvalue);
               if (strcmp($formvalue, $name) == 0){
               } else {
               }
-            }
+            }*/
           ?>
         </ul>
       </div>
@@ -381,6 +382,7 @@ $app_name = idx($app_info, 'name', '');
 -->
     <?php
       }
+    }
     ?>
   </body>
 </html>
