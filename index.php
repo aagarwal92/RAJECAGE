@@ -109,24 +109,6 @@ $app_name = idx($app_info, 'name', '');
 
    <script type="text/javascript" src="/javascript/jquery-1.7.1.min.js"></script>
    <script type="text/javascript">
-   function isMatch2(String test)
-    {
-    if (test == '$name')
-       alert("SAME!");
-    else
-       alert("No!");
-    }
-    /*
-    $(function(){
-      $('#submit').click(function() {
-        if ('$name' == 'A')
-          alert("SADFASDF");
-        else
-          alert("zzzzzz");
-      }
-    }*/
-   </script>
-   <script type="text/javascript">
      function logResponse(response) {
        if (console && console.log) {
          console.log('The response was', response);
@@ -354,7 +336,7 @@ function testResults (form) {
   if (test == '$name')
      alert("SAME!");
   else
-     alert("No!");
+     alert("$name");
   }
 </SCRIPT>
 
