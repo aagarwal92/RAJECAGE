@@ -374,7 +374,6 @@ function testResults (form) {
            </form>
          </li>
 
-
        </ul>
      </div>
 
