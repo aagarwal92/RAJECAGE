@@ -171,7 +171,21 @@ $app_name = idx($app_info, 'name', '');
           document.createElement(tags.pop());
       </script>
     <![endif]-->
+ <script>
+  // basic show and hide
+ $(document).ready(function() 
+ {
+   $('#samples').hide();
+   $('#reset').hide();
+   $('#click').click( function() 
+   {
+    $('#samples').toggle();
+    $('#reset').show();
+   });
+});
+</script>
   </head>
+
   <body>
     <div id="fb-root"></div>
     <script type="text/javascript">
@@ -227,11 +241,11 @@ $app_name = idx($app_info, 'name', '');
                 <span class="plus">Post to Wall</span>
               </a>
             </li>
-            <li>
+           <!-- <li>
               <a href="#" class="facebook-button speech-bubble" id="sendToFriends" data-url="<?php echo AppInfo::getUrl(); ?>">
                 <span class="speech-bubble">Send Message</span>
               </a>
-            </li>
+            </li>-->
             <li>
               <a href="#" class="facebook-button apprequests" id="sendRequest" data-message="Test this awesome app">
                 <span class="apprequests">Send Requests</span>
@@ -252,6 +266,9 @@ $app_name = idx($app_info, 'name', '');
     <section id="get-started">
       <p>Welcome to Raje Cage!<br>
       Here are some friends of yours. Let's see if you can guess their names.</p>
+      <a href="#" target="_top" id="click" class="button">Click to Begin!</a>
+      <a href="#" target="_top" id="reset" class="button">Reset</a>
+
     </section>
 
     <?php
@@ -261,7 +278,6 @@ $app_name = idx($app_info, 'name', '');
     <section id="samples" class="clearfix">
       <h1> Take a good look at your friends below. Soon, you'll have to guess who they are.</h1>
       <div class="center">
-        <h3>A few of your friends</h3>
         <ul  style="text-align:center" class="friends">
           <?php
             foreach ($friends as $friend) {
@@ -271,16 +287,25 @@ $app_name = idx($app_info, 'name', '');
           ?>
           <li>
             <a>
-              <img src="https://graph.facebook.com/<?php echo he($id) ?>/picture?type=square" alt="<?php echo he($name); ?>">
+              <img src="https://graph.facebook.com/<?php echo he($id) ?>/picture?width=125&height=125 " alt="<?php echo he($name); ?>">
             </a>
           </li>
           <li>
-             <input type="text" value="Guess who!" onclick="this.value = '';"> 
-            <input type="submit" value="Submit">
+            <form action="" method="post">
+             <input type="text" name="input" value="Guess who!" onclick="this.value ='';"> 
+             <input type="submit" name="submit" value="Submit">
+            </form>
           </li>
 
           <?php
-            }
+          /*
+            if (isset($_POST['input'])){
+              $formvalue = $_POST['input'];
+              $formvalue = strtolower($formvalue);
+              if (strcmp($formvalue, $name) == 0){
+              } else {
+              }
+            }*/
           ?>
         </ul>
       </div>
@@ -357,6 +382,7 @@ $app_name = idx($app_info, 'name', '');
 -->
     <?php
       }
+    }
     ?>
   </body>
 </html>
