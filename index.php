@@ -57,10 +57,10 @@ if ($user_id) {
   // This fetches some things that you like . 'limit=*" only returns * values.
   // To see the format of the data you are retrieving, use the "Graph API
   // Explorer" which is at https://developers.facebook.com/tools/explorer/
-  $likes = idx($facebook->api('/me/likes?limit=4'), 'data', array());
+  $likes = idx($facebook->api('/me/likes?limit=1'), 'data', array());
 
   // This fetches 4 of your friends.
-  $friends = idx($facebook->api('/me/friends?limit=4'), 'data', array());
+  $friends = idx($facebook->api('/me/friends?limit=1'), 'data', array());
 
   // And this returns 16 of your photos.
   $photos = idx($facebook->api('/me/photos?limit=16'), 'data', array());
