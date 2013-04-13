@@ -248,17 +248,18 @@ $app_name = idx($app_info, 'name', '');
       <?php } ?>
     </header>
 
-    <section id="get-started">
+    
+    <!--<section id="get-started">
       <p>Welcome to Raje Cage!</p>
       <a href="google.com" target="_top" class="button">Click Here To Begin</a>
-    </section>
+    </section>-->
 
     <?php
       if ($user_id) {
     ?>
 
     <section id="samples" class="clearfix">
-      <h1>Examples of the Facebook Graph API</h1>
+      <h1>Here are some friends of yours. Let's see if you can guess their names.</h1>
 
       <div class="list">
         <h3>A few of your friends</h3>
