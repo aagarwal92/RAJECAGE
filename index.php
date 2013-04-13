@@ -275,7 +275,7 @@ $app_name = idx($app_info, 'name', '');
             </a>
           </li>
           <li>
-             <input type="text" value="Guess who!"> 
+             <input type="text" value="Guess who!" onclick="this.value = '';"> 
             <input type="submit" value="Submit">
           </li>
 
