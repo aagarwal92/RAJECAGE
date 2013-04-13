@@ -260,7 +260,7 @@ $app_name = idx($app_info, 'name', '');
 
     <section id="samples" class="clearfix">
       <h1> Take a good look at your friends below. Soon, you'll have to guess who they are.</h1>
-      <div>
+      <div class="list">
         <h3>A few of your friends</h3>
         <ul class="friends">
           <?php
@@ -269,11 +269,9 @@ $app_name = idx($app_info, 'name', '');
               $id = idx($friend, 'id');
               $name = idx($friend, 'name');
           ?>
-          <li>
-            <a href="https://www.facebook.com/<?php echo he($id); ?>" target="_top">
+            <a href="https://www.facebook.com/<?php echo he($id);  ?>" target="_top">
               <img src="https://graph.facebook.com/<?php echo he($id) ?>/picture?type=square" alt="<?php echo he($name); ?>">
             </a>
-          </li>
           <?php
             }
           ?>
