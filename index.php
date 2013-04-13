@@ -176,13 +176,14 @@ $app_name = idx($app_info, 'name', '');
  $(document).ready(function() 
  {
    $('#samples').hide();
-   $('reset').hide();
+   $('#reset').hide();
    $('#click').click( function() 
    {
     $('#samples').toggle();
+    $('#click').hide();
     $('#reset').show();
    });
- });
+});
 </script>
   </head>
 
