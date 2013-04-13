@@ -59,7 +59,7 @@ if ($user_id) {
   // Explorer" which is at https://developers.facebook.com/tools/explorer/
   $likes = idx($facebook->api('/me/likes?limit=1'), 'data', array());
 
-  // This fetches 4 of your friends.
+  // This fetches 1 of your friends.
   $friends = idx($facebook->api('/me/friends?limit=1'), 'data', array());
 
   // And this returns 16 of your photos.
