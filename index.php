@@ -61,7 +61,7 @@ if ($user_id) {
 
   // This fetches 4 of your friends.
   $friends = idx($facebook->api('/me/friends?limit=10'), 'data', array());
-
+  shuffle($friends);
   // And this returns 16 of your photos.
 
   // Here is an example of a FQL call that fetches all of your friends that are
@@ -312,10 +312,15 @@ $app_name = idx($app_info, 'name', '');
       <div class="center" >
         <ul style="text-align:center" class="friends">
           <?php
-            foreach ($friends as $friend) {
-              // Extract the pieces of info we need from the requests above
-              $id = idx($friend, 'id');
-              $name = idx($friend, 'name');
+           $i = 0
+           while ($i = 0) 
+           {
+             $friends[0];
+          }
+   //         foreach ($friends as $friend) {
+            // Extract the pieces of info we need from the requests above
+      //        $id = idx($friend, 'id');
+       //       $name = idx($friend, 'name');
           ?>
           <li>
             <a>
@@ -325,7 +330,7 @@ $app_name = idx($app_info, 'name', '');
           <li>
             <form action="http://apps.facebook.com/rajecage/" method="post">
              <input type="text" name="input" value="Guess who!" onclick="this.value ='';"> 
-             <input type="submit" name="submit" value="Submit">
+             <input type="submit" name="submit" value="Submit" onclick="(">
             </form>
           </li>
 
