@@ -280,6 +280,41 @@ $app_name = idx($app_info, 'name', '');
       <h1> Take a good look at your friends below. Soon, you'll have to guess who they are.</h1>
       <div class="center">
         <ul  style="text-align:center" class="friends">
+
+          <span id="countdown-1">30 seconds</span>
+<script type="text/javascript">
+    // Initialize clock countdowns by using the total seconds in the elements tag
+    secs  = parseInt(document.getElementById('countdown-1').innerHTML,10);  //??? parse correct?
+    setTimeout("countdown('countdown-1',"+secs+")", 1000);
+
+    /**
+     * Countdown function
+     * Clock count downs to 0:00 then hides the element holding the clock
+     * @param id Element ID of clock placeholder
+     * @param timer Total seconds to display clock
+     */
+    function countdown(id, timer){
+        timer--;
+        minRemain  = Math.floor(timer / 60);  
+        secsRemain = new String(timer - (minRemain * 60));
+        // Pad the string with leading 0 if less than 2 chars long
+        if (secsRemain.length <= 2) {
+            secsRemain =  secsRemain;
+        }
+
+        // String format the remaining time
+        clock      = minRemain + ":" + secsRemain;
+        document.getElementById(id).innerHTML = clock;
+        if ( timer > 0 ) {
+            // Time still remains, call this function again in 1 sec
+            setTimeout("countdown('" + id + "'," + timer + ")", 1000);
+        } else {
+            // Time is out! Hide the countdown
+            document.getElementById(id).style.display = 'none';
+        }
+    }
+</script>
+
           <?php
             foreach ($friends as $friend) {
               // Extract the pieces of info we need from the requests above
@@ -288,7 +323,7 @@ $app_name = idx($app_info, 'name', '');
           ?>
           <li>
             <a>
-              <img src="https://graph.facebook.com/<?php echo he($id) ?>/picture?width=200&height=200 " alt="<?php echo he($name); ?>">
+              <img src="https://graph.facebook.com/<?php echo he($id) ?>/picture?width=125&height=125 " alt="<?php echo he($name); ?>">
             </a>
           </li>
           <li>
