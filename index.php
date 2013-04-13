@@ -260,7 +260,7 @@ $app_name = idx($app_info, 'name', '');
 
     <section id="samples" class="clearfix">
       <h1> Take a good look at your friends below. Soon, you'll have to guess who they are.</h1>
-      <div class="list">
+      <div class="center">
         <h3>A few of your friends</h3>
         <ul class="friends">
           <?php
