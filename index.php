@@ -174,9 +174,10 @@ $points = 0;
       </script>
     <![endif]-->
   </head>
-  $(document).ready(function() {
+  $.ready(function() {
      $(#samples).hide();
    });
+
   <body>
     <div id="fb-root"></div>
     <script type="text/javascript">
