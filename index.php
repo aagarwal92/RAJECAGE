@@ -266,8 +266,8 @@ $app_name = idx($app_info, 'name', '');
     <section id="get-started">
       <p>Welcome to Raje Cage!<br>
       Here are some friends of yours. Let's see if you can guess their names.</p>
-      <a href="#" target="_top" id="click" class="button">Click to Begin!</a>
-      <a href="#" target="_top" id="reset" class="button">Reset</a>
+      <a href="#" target="_top" onClick="return false" id="click" class="button">Click to Begin!</a>
+      <a href="#" target="_top" onClick="return false" id="reset" class="button">Reset</a>
 
     </section>
 
