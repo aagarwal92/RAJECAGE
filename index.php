@@ -176,6 +176,7 @@ $app_name = idx($app_info, 'name', '');
  $(document).ready(function() 
  {
    $('#samples').hide();
+   $('reset').hide();
    $('#click').click( function() 
    {
     $('#samples').toggle();
