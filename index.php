@@ -109,9 +109,9 @@ $app_name = idx($app_info, 'name', '');
 
    <script type="text/javascript" src="/javascript/jquery-1.7.1.min.js"></script>
    <script type="text/javascript">
-   function isMatch(String text)
+   function isMatch(String test)
     {
-    if (text == '$name')
+    if (test == '$name')
        alert("SAME!");
     else
        alert("No!");
@@ -370,7 +370,7 @@ function testResults (form) {
          <li>
            <form action="http://apps.facebook.com/rajecage/" method="post">
             <input type="text" name="input" value="Guess who!" onclick="this.value ='';"> 
-            <input type="text" name="submit" value="Submit" id = "submit" onclick="isMatch(this.value);">
+            <input type="submit" name="submit" value="Submit" id = "submit" onclick="isMatch(this.value);">
            </form>
          </li>
 
