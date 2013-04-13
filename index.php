@@ -267,7 +267,7 @@ $(document).ready(function()
    <section id="get-started">
      <p>Welcome to Raje Cage!<br>
      Here are some friends of yours. Let's see if you can guess their names.</p>
-     <a href="#" target="_top" onclick="return false" id="click" class="button">Click to Begin!</a>
+     <a href="#" target="_top" onclick="return false;countdown()" id="click" class="button">Click to Begin!</a>
      <a href="#" target="_top" onclick="return false" id="reset" class="button">Reset</a>
 
    </section>
@@ -282,8 +282,8 @@ $(document).ready(function()
          <span id="countdown-1">30 seconds</span>
 <script type="text/javascript">
    // Initialize clock countdowns by using the total seconds in the elements tag
-   secs  = parseInt(document.getElementById('countdown-1').innerHTML,10);  //??? parse correct?
-   setTimeout("countdown('countdown-1',"+secs+")", 1000);
+   //secs  = parseInt(document.getElementById('countdown-1').innerHTML,10);  //??? parse correct?
+   //setTimeout("countdown('countdown-1',"+secs+")", 1000);
 
    /**
     * Countdown function
@@ -291,21 +291,21 @@ $(document).ready(function()
     * @param id Element ID of clock placeholder
     * @param timer Total seconds to display clock
     */
-   function countdown(id, timer){
+	var timer = 30;
+    function countdown(){
        timer--;
        minRemain  = Math.floor(timer / 60); 
        secsRemain = new String(timer - (minRemain * 60));
        // Pad the string with leading 0 if less than 2 chars long
-       if (secsRemain.length < 2) {
+       if (timer < 10) {
            secsRemain =  '0' + secsRemain;
        }
 
        // String format the remaining time
-       clock      = minRemain + ":" + secsRemain;
-       document.getElementById(id).innerHTML = clock;
+       clock = minRemain + ":" + secsRemain;
        if ( timer > 0 ) {
            // Time still remains, call this function again in 1 sec
-           setTimeout("countdown('" + id + "'," + timer + ")", 1000);
+           setTimeout("countdown()", 1000);
        } else {
            // Time is out! Hide the countdown
           //document.getElementById(id).style.display = 'none';
