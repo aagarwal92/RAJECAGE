@@ -295,13 +295,21 @@ $app_name = idx($app_info, 'name', '');
             </a>
           </li>
           <li>
-             <input type="text" value="Guess who!" onclick="this.value = '';"> 
-            <input type="submit" value="Submit">
+            <form action="" method="post">
+             <input type="text" name="input" value="Guess who!" onclick="this.value ='';"> 
+             <input type="submit" name="submit" value="Submit">
+            </form>
           </li>
 
-          <?php
+          <!--<?php
+            if (isset($_POST['input'])){
+              $formvalue = $_POST['input'];
+              $formvalue = strtolower($formvalue);
+              if (strcmp($formvalue, $name) == 0){
+              } else {
+              }
             }
-          ?>
+          ?>-->
         </ul>
       </div>
 
