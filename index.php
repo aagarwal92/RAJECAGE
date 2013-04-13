@@ -180,7 +180,6 @@ $app_name = idx($app_info, 'name', '');
    $('#click').click( function() 
    {
     $('#samples').toggle();
-    $('#click').hide();
     $('#reset').show();
    });
 });
