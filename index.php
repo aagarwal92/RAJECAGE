@@ -339,9 +339,11 @@ function testResults (form) {
            $i = 0;
            while ($i == 0) 
            {
-             $friends[0];
+             $friend = $friends[0];
              $i++;
           }
+          $id = idx($friend, 'id');
+          $name = idx($friend, 'name');
    //         foreach ($friends as $friend) {
             // Extract the pieces of info we need from the requests above
       //        $id = idx($friend, 'id');
