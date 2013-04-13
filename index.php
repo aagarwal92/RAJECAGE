@@ -179,7 +179,7 @@ $app_name = idx($app_info, 'name', '');
    $('#reset').hide();
    $('#click').click( function() 
    {
-    $('#click').hide()
+    $('#samples').toggle();
     $('#reset').show();
    });
 });
