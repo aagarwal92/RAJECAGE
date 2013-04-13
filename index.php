@@ -333,10 +333,10 @@ function testResults (form) {
 
  function isMatch(test)
   {
-  if (test == '$name')
+  if (test == $name)
      alert("SAME!");
   else
-     alert("$name");
+     alert($name);
   }
 </SCRIPT>
 
