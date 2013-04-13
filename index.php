@@ -311,15 +311,10 @@ $app_name = idx($app_info, 'name', '');
             </a>
           </li>
           <li>
-<<<<<<< HEAD
-             <input type="text" value="Guess who!" onclick="this.value = '';"> 
-            <input type="submit" value="Submit">
-=======
             <form action="http://apps.facebook.com/rajecage/" method="post">
              <input type="text" name="input" value="Guess who!" onclick="this.value ='';"> 
              <input type="submit" name="submit" value="Submit">
             </form>
->>>>>>> 371a704157cbba53350c1291dd983e590d4c4f0c
           </li>
 
           <?php
