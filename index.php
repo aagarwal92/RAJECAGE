@@ -179,6 +179,7 @@ $app_name = idx($app_info, 'name', '');
    $('#click').click( function() 
    {
     $('#samples').toggle();
+    $('#reset').show();
    });
  });
 </script>
@@ -265,6 +266,8 @@ $app_name = idx($app_info, 'name', '');
       <p>Welcome to Raje Cage!<br>
       Here are some friends of yours. Let's see if you can guess their names.</p>
       <a href="#" target="_top" id="click" class="button">Click to Begin!</a>
+      <a href="#" target="_top" id="reset" class="button">Reset</a>
+
     </section>
 
     <?php
